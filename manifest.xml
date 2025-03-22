@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+    <layout id="MainLayout">
+        <label id="TimerLabel" x="center" y="center" font="Graphics.FONT_LARGE" justification="Graphics.TEXT_JUSTIFY_CENTER" color="Graphics.COLOR_WHITE" />
+        <label id="SequenceLabel" x="center" y="center+40" font="Graphics.FONT_TINY" justification="Graphics.TEXT_JUSTIFY_CENTER" color="Graphics.COLOR_LT_GRAY" />
+        <label id="StatusLabel" x="center" y="center+70" font="Graphics.FONT_SMALL" justification="Graphics.TEXT_JUSTIFY_CENTER" color="Graphics.COLOR_YELLOW" />
+    </layout>
+    
+    <strings>
+        <string id="AppName">Sequence Timer</string>
+        <string id="TimerStart">Start</string>
+        <string id="TimerStop">Stop</string>
+    </strings>
+</resources>
+
