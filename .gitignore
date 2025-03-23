@@ -30,3 +30,13 @@
 *.exe
 *.out
 *.app
+
+*.code-workspace
+
+developer_key
+.DS_Store
+
+**/bin
+**/gen
+**/internal-mir
+**/mir
