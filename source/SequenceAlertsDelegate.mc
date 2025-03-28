@@ -11,5 +11,4 @@ class SequenceAlertsDelegate extends WatchUi.BehaviorDelegate {
         WatchUi.pushView(new Rez.Menus.MainMenu(), new SequenceAlertsMenuDelegate(), WatchUi.SLIDE_UP);
         return true;
     }
-
 }

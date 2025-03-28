@@ -3,12 +3,12 @@ import Toybox.Lang;
 import Toybox.WatchUi;
 
 class SequenceAlertsApp extends Application.AppBase {
-    private var _view;
-    private var _sequenceTimer;
     public var _sequenceNumbers;
-    private var _currentIndex;
     public var _isTimerRunning;
+    private var _view;
     private var _timeRemaining;
+    private var _sequenceTimer;
+    private var _currentIndex;
 
     function initialize() {
         AppBase.initialize();
