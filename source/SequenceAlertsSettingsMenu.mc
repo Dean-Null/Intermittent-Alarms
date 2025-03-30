@@ -5,9 +5,9 @@ using Toybox.System;
 using Toybox.Attention;
 
 // Settings menu for customizing the sequence
-class SequenceTimerSettingsMenu extends WatchUi.Menu2 {
+class SequenceAlertsSettingsMenu extends WatchUi.Menu2 {
     function initialize() {
-        //Menu2.initialize();
+        Menu2.initialize({:title=>"Settings"});
         Menu2.setTitle("Settings");
         
         // Add menu items for predefined sequences

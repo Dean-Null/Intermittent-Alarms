@@ -1,21 +1,15 @@
-import Toybox.Lang;
-import Toybox.System;
-import Toybox.WatchUi;
+using Toybox.Application;
+using Toybox.WatchUi;
+using Toybox.Timer;
+using Toybox.System;
+using Toybox.Attention;
 
-class SequenceAlertsMenuDelegate extends WatchUi.MenuInputDelegate {
-
+// Menu input delegate
+class SequenceAlertsMenuDelegate extends WatchUi.Menu2InputDelegate {
     function initialize() {
-        MenuInputDelegate.initialize();
+        Menu2InputDelegate.initialize();
     }
-
-    function onMenuItem(item as Symbol) as Void {
-        if (item == :item_1) {
-            System.println("item 1");
-        } else if (item == :item_2) {
-            System.println("item 2");
-        }
-    }
-
+    
     function onSelect(item) {
         var id = item.getId();
         
@@ -31,7 +25,7 @@ class SequenceAlertsMenuDelegate extends WatchUi.MenuInputDelegate {
         }
         
         WatchUi.popView(WatchUi.SLIDE_RIGHT);
-        return true;
+        // v Had an error because no return is expected
+        //return true;
     }
-
 }

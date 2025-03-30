@@ -1,14 +1,17 @@
-import Toybox.Application;
-import Toybox.Lang;
-import Toybox.WatchUi;
+using Toybox.Application;
+using Toybox.WatchUi;
+using Toybox.Timer;
+using Toybox.System;
+using Toybox.Attention;
 
 class SequenceAlertsApp extends Application.AppBase {
-    public var _sequenceNumbers;
-    public var _isTimerRunning;
     private var _view;
-    private var _timeRemaining;
-    private var _sequenceTimer;
+    public var _sequenceTimer;
+    public var _sequenceNumbers;
     private var _currentIndex;
+    public var _isTimerRunning;
+    private var _timeRemaining;
+    private var _delegate;
 
     function initialize() {
         AppBase.initialize();
@@ -19,21 +22,31 @@ class SequenceAlertsApp extends Application.AppBase {
     }
 
     // onStart() is called on application start up
-    function onStart(state as Dictionary?) as Void {
+    function onStart(state) as Void {
     }
 
     // onStop() is called when your application is exiting
-    function onStop(state as Dictionary?) as Void {
+    function onStop(state) as Void {
         if (_isTimerRunning) {
             _sequenceTimer.stop();
         }
     }
 
-    // Return the initial view of your application here
-    function getInitialView() as [Views] or [Views, InputDelegates] {
-        return [ new SequenceAlertsView(), new SequenceAlertsDelegate() ];
+    // Return the initial view of your application
+    function getInitialView() {
+        _view = new SequenceAlertsView();
+        _delegate = new SequenceAlertsInputDelegate();
+        return [_view, _delegate];
     }
-
+    
+    // Handle menu button press - needed for API level compatibility
+    function onMenu() {
+        var menu = new SequenceAlertsSettingsMenu();
+        var menuDelegate = new SequenceAlertsMenuDelegate();
+        WatchUi.pushView(menu, menuDelegate, WatchUi.SLIDE_UP);
+        return true;
+    }
+    
     // Start the timer sequence
     function startSequence() {
         if (_isTimerRunning) {
@@ -50,7 +63,7 @@ class SequenceAlertsApp extends Application.AppBase {
         // Start a timer that ticks every second
         _sequenceTimer.start(method(:timerCallback), 1000, true);
     }
-
+    
     // Stop the timer sequence
     function stopSequence() {
         if (_isTimerRunning) {
@@ -110,8 +123,3 @@ class SequenceAlertsApp extends Application.AppBase {
         }
     }
 }
-
-function getApp() as SequenceAlertsApp {
-    return Application.getApp() as SequenceAlertsApp;
-}
-

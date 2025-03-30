@@ -4,7 +4,8 @@ using Toybox.Timer;
 using Toybox.System;
 using Toybox.Attention;
 
-class InputDelegate extends WatchUi.InputDelegate {
+// Input handler for button presses
+class SequenceAlertsInputDelegate extends WatchUi.InputDelegate {
     function initialize() {
         InputDelegate.initialize();
     }
@@ -21,8 +22,16 @@ class InputDelegate extends WatchUi.InputDelegate {
                 Application.getApp().stopSequence();
             }
             return true;
+        } else if (key == WatchUi.KEY_MENU) {
+            // Explicitly handle menu button for older API levels
+            return Application.getApp().onMenu();
         }
         
         return false;
+    }
+    
+    // Add explicit menu event handler for API compatibility
+    function onMenu() {
+        return Application.getApp().onMenu();
     }
 }

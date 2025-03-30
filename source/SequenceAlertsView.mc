@@ -1,19 +1,20 @@
 import Toybox.Graphics;
 import Toybox.WatchUi;
 
+// Main View class for the application
 class SequenceAlertsView extends WatchUi.View {
     private var _timerLabel;
     private var _sequenceLabel;
     private var _statusLabel;
-
+    
     function initialize() {
         View.initialize();
     }
 
-    // Load your resources here
-    function onLayout(dc as Dc) as Void {
+    // Load resources
+    function onLayout(dc) {
         setLayout(Rez.Layouts.MainLayout(dc));
-
+        
         _timerLabel = findDrawableById("TimerLabel");
         _sequenceLabel = findDrawableById("SequenceLabel");
         _statusLabel = findDrawableById("StatusLabel");
@@ -72,22 +73,18 @@ class SequenceAlertsView extends WatchUi.View {
         _statusLabel.setText("Sequence Complete");
         WatchUi.requestUpdate();
     }
+    
+    // Called when the view is shown
+    function onShow() {
+    }
 
-    // Called when this View is brought to the foreground. Restore
-    // the state of this View and prepare it to be shown. This includes
-    // loading resources into memory.
-    function onShow() as Void {
+    // Called when the view is hidden
+    function onHide() {
     }
 
     // Update the view
     function onUpdate(dc as Dc) as Void {
         // Call the parent onUpdate function to redraw the layout
         View.onUpdate(dc);
-    }
-
-    // Called when this View is removed from the screen. Save the
-    // state of this View here. This includes freeing resources from
-    // memory.
-    function onHide() as Void {
     }
 }
