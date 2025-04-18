@@ -13,9 +13,12 @@ class SequenceAlertsApp extends Application.AppBase {
     private var _timeRemaining;
     private var _delegate;
 
+    private var _minutesInt=10;
+
     function initialize() {
         AppBase.initialize();
-        _sequenceNumbers = [1, 2, 3, 5, 8, 13]; // Example Fibonacci sequence in minutes
+        // Example Fibonacci sequence in minutes
+        _sequenceNumbers = [1, 2, 3, 5, 8, 13, 21];
         _currentIndex = 0;
         _isTimerRunning = false;
         _sequenceTimer = new Timer.Timer();
@@ -55,7 +58,7 @@ class SequenceAlertsApp extends Application.AppBase {
         
         _currentIndex = 0;
         _isTimerRunning = true;
-        _timeRemaining = _sequenceNumbers[_currentIndex] * 60; // Convert minutes to seconds
+        _timeRemaining = _sequenceNumbers[_currentIndex] * _minutesInt; // Convert minutes to seconds
         
         // Update the view to show first countdown
         _view.updateCountdown(_timeRemaining, _sequenceNumbers[_currentIndex]);
@@ -96,7 +99,7 @@ class SequenceAlertsApp extends Application.AppBase {
             }
             
             // Start the next interval
-            _timeRemaining = _sequenceNumbers[_currentIndex] * 60; // Convert minutes to seconds
+            _timeRemaining = _sequenceNumbers[_currentIndex] * _minutesInt; // Convert minutes to seconds
         }
     }
     
