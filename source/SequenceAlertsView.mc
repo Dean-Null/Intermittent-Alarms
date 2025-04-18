@@ -39,7 +39,7 @@ class SequenceAlertsView extends WatchUi.View {
     function updateSequenceDisplay(sequence) {
         var seqText = "";
         for (var i = 0; i < sequence.size(); i++) {
-            seqText += sequence[i].toString();
+            seqText += sequence.indexOf(i).toString();
             if (i < sequence.size() - 1) {
                 seqText += ", ";
             }

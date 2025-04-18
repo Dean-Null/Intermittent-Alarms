@@ -58,10 +58,10 @@ class SequenceAlertsApp extends Application.AppBase {
         
         _currentIndex = 0;
         _isTimerRunning = true;
-        _timeRemaining = _sequenceNumbers[_currentIndex] * _minutesInt; // Convert minutes to seconds
+        _timeRemaining = _sequenceNumbers.indexOf(_currentIndex) * _minutesInt; // Convert minutes to seconds
         
         // Update the view to show first countdown
-        _view.updateCountdown(_timeRemaining, _sequenceNumbers[_currentIndex]);
+        _view.updateCountdown(_timeRemaining, _sequenceNumbers.indexOf(_currentIndex));
         
         // Start a timer that ticks every second
         _sequenceTimer.start(method(:timerCallback), 1000, true);
@@ -81,7 +81,7 @@ class SequenceAlertsApp extends Application.AppBase {
         _timeRemaining--;
         
         // Update the view with the new time
-        _view.updateCountdown(_timeRemaining, _sequenceNumbers[_currentIndex]);
+        _view.updateCountdown(_timeRemaining, _sequenceNumbers.indexOf(_currentIndex));
         
         // If the timer reaches zero, trigger the alarm and move to next number in sequence
         if (_timeRemaining <= 0) {
@@ -99,7 +99,7 @@ class SequenceAlertsApp extends Application.AppBase {
             }
             
             // Start the next interval
-            _timeRemaining = _sequenceNumbers[_currentIndex] * _minutesInt; // Convert minutes to seconds
+            _timeRemaining = _sequenceNumbers.indexOf(_currentIndex) * _minutesInt; // Convert minutes to seconds
         }
     }
     
@@ -114,7 +114,7 @@ class SequenceAlertsApp extends Application.AppBase {
         
         // If there's another interval, show what's coming next
         if (_currentIndex < _sequenceNumbers.size() - 1) {
-            _view.showNextInterval(_sequenceNumbers[_currentIndex + 1]);
+            _view.showNextInterval(_sequenceNumbers.indexOf(_currentIndex + 1));
         }
     }
     
