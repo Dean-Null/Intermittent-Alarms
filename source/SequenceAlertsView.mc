@@ -22,7 +22,8 @@ class SequenceAlertsView extends WatchUi.View {
         // Initialize display
         _timerLabel.setText("Ready");
         _statusLabel.setText("Press Start");
-        updateSequenceDisplay(Application.getApp()._sequenceNumbers);
+        var something = Application.getApp()._sequenceNumbers;
+        updateSequenceDisplay(something);
     }
 
     // Update the display with the current countdown

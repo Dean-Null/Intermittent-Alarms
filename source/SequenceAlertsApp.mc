@@ -58,7 +58,8 @@ class SequenceAlertsApp extends Application.AppBase {
         
         _currentIndex = 0;
         _isTimerRunning = true;
-        _timeRemaining = _sequenceNumbers.indexOf(_currentIndex) * _minutesInt; // Convert minutes to seconds
+        var variable = _sequenceNumbers.indexOf(_currentIndex);
+        _timeRemaining = variable * _minutesInt; // Convert minutes to seconds
         
         // Update the view to show first countdown
         _view.updateCountdown(_timeRemaining, _sequenceNumbers.indexOf(_currentIndex));
