@@ -1,94 +1,63 @@
-# Pattern Timer
+# Sequenced Alerts
 
 ## Table of Contents
 - [Overview](#overview)
 - [Installation](#installation)
 - [Usage](#usage)
 - [Features](#features)
-- [Contributing](#contributing)
+- [Diagrams](#diagrams)
 - [License](#license)
 
 ## Overview
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. *Phasellus* nec **semper** tortor. ***Praesent*** ut commodo ante, vel dignissim mi. 
-
-> Cras faucibus libero sit amet dui elementum, in semper erat porttitor. Nulla facilisi.
-> 
-> Fusce dignissim sed erat eget ultrices. Nam est magna, vehicula vel enim eget, volutpat finibus diam.
+Sequenced Alerts is a watch app meant to aide in segmenting a day into smaller portions. The user selects a sequence of alert they would like to follow for the day. The user can save patterns for days that they liked and recall those days as an option based on the day of the week. 
 
 ## Installation
+Open the Garmin Connect application on your mobile device or navigate to garmin using your preferred browser.
 
-### Prerequisites
-* Item 1
-* Item 2
-* Item 3
-
-### Step-by-Step Guide
-1. First step with `inline code`
-2. Second step
-3. Third step
-
-```bash
-# Code block example
-npm install 
-npm start
-```
-
-```javascript
-// JavaScript example
-function helloWorld() {
-  console.log("Hello, world!");
-  return true;
-}
-```
+### Available for select devices
+* Venu 2
 
 ## Usage
+1. Open the application on one of the supported devices,
+2. Select your mode from the main menu,
+3. Go about your activity, the timer will alert you when you are ready to switch
 
-Here's how to use the project:
-
-![Alt text for image](https://via.placeholder.com/150)
-
-You can also reference specific [documentation](#overview).
+If you want to stop that is an option from the alert screen.
 
 ## Features
-
 | Feature | Description | Status |
 |---------|-------------|--------|
-| Feature 1 | Lorem ipsum dolor sit amet | ✅ |
-| Feature 2 | Consectetur adipiscing elit | 🚧 |
-| Feature 3 | Phasellus nec semper tortor | ❌ |
+| Start | Initalization for all new Users | ✅ |
+| Settings | Options for making adjustments to the vibration settings and duration | 🚧 |
+| Timer | The screen that shows the timer and activity | 🚧 |
+| Repeat | Replay the alerts used on the previous day | 🚧 |
+| Typical | Repeats the most commonly used on that day of the week | 🚧 |
+| Alerts | The screen that shows when the timer has run out | 🚧 |
 
 ### Sub-Features
-
-Nested lists:
-- Main item 1
-  - Sub item 1.1
-  - Sub item 1.2
-    - Sub-sub item 1.2.1
-- Main item 2
-  - Sub item 2.1
-
-## Contributing
-
-We welcome contributions! Please follow these steps:
-
-~~This text is crossed out and not relevant anymore.~~
-
-Guidelines:
-- Fork the repository
-- Create a feature branch
-- Submit a pull request
-
-### Code of Conduct
-
-<details>
-<summary>Click to expand Code of Conduct</summary>
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec semper tortor. Praesent ut commodo ante, vel dignissim mi. Cras faucibus libero sit amet dui elementum, in semper erat porttitor. Nulla facilisi. Fusce dignissim sed erat eget ultrices.
-
-</details>
+Main Menu:
+- Start
+  - User selects an activity and limit, 15 minute intervals
+  - Timer screen appears
+- Repeat
+  - Repeats the same activity and intervals from the previous day
+- Typical
+  - Looks at the day of the week and repeats similar activity and intervals
+- Settings
+  - Vibration 
+    - duration
+    - confirm
+- Timer
+  - Countdown
+  - Not always on display
+  - Cancel button
+  - Activity label
+- Alerts
+  - Next activity
+  - Next interval
+  - Extend activity
 
 ## Diagrams
-
 Sequence diagram:
 
 ```mermaid
@@ -98,57 +67,27 @@ sequenceDiagram
     A->>B: Request Data
     B->>A: Return Data
 ```
-
-## Mathematical Notation
-
-When $a \ne 0$, there are two solutions to $ax^2 + bx + c = 0$ and they are
-$x = {-b \pm \sqrt{b^2-4ac} \over 2a}$
-
 ## Definitions
+Interval
+: Measured in seconds going up to 5, 10, 15 minutes
+60*5
 
-Term 1
-: Definition of term 1
-
-Term 2
-: Definition of term 2
+Activity
+: A representation of what the user might be doing inbetween alerts
 
 ## Task Lists
-
-- [x] Completed task
-- [ ] Incomplete task
-- [ ] Another incomplete task
-
-## Footnotes
-
-Here's a sentence with a footnote. [^1]
-
-[^1]: This is the footnote.
-
-## Horizontal Rule
-
----
-
-## Custom HTML
-
-<div align="center">
-  <h3>Custom HTML Content</h3>
-  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-</div>
+- [x] Create the project
+- [ ] Deploy sample application to watch
+- [ ] Research testing
 
 ## License
-
 This project is licensed under the [MIT License](https://opensource.org/licenses/MIT).
 
 ## Contact
-
 - Email: [example@example.com](mailto:example@example.com)
-- Twitter: [@username](https://twitter.com/username)
-- Website: [website.com](https://website.com)
 
 ---
 
-<center>© 2025 Project Name. All rights reserved.</center>
+<center>© 2025 Sequence Alerts. All rights reserved.</center>
 
 ---
-
-*This README template was generated with the assistance of Claude AI by Anthropic.*
