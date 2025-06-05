@@ -1,27 +1,27 @@
 using Toybox.Application;
-using Toybox.WatchUi;
-using Toybox.Timer;
-using Toybox.System;
 using Toybox.Attention;
+using Toybox.System;
+using Toybox.Timer;
+using Toybox.WatchUi;
 
 class SequenceAlertsApp extends Application.AppBase {
+    public var sequenceTimer;
+    public var sequenceNumbers;
+    public var isTimerActive;
+
     private var _view;
-    public var _sequenceTimer;
-    public var _sequenceNumbers;
-    private var _currentIndex;
-    public var _isTimerRunning;
     private var _timeRemaining;
     private var _delegate;
-
-    private var _minutesInt=10;
+    private var _currentIndex;
+    private var _secondsInt=60;
 
     function initialize() {
         AppBase.initialize();
         // Example Fibonacci sequence in minutes
-        _sequenceNumbers = [1, 2, 3, 5, 8, 13, 21];
+        sequenceNumbers = [1, 2, 3, 5, 8, 13];
         _currentIndex = 0;
-        _isTimerRunning = false;
-        _sequenceTimer = new Timer.Timer();
+        isTimerActive = false;
+        sequenceTimer = new Timer.Timer();
     }
 
     // onStart() is called on application start up
@@ -30,8 +30,8 @@ class SequenceAlertsApp extends Application.AppBase {
 
     // onStop() is called when your application is exiting
     function onStop(state) as Void {
-        if (_isTimerRunning) {
-            _sequenceTimer.stop();
+        if (isTimerActive) {
+            sequenceTimer.stop();
         }
     }
 
@@ -52,27 +52,27 @@ class SequenceAlertsApp extends Application.AppBase {
     
     // Start the timer sequence
     function startSequence() {
-        if (_isTimerRunning) {
+        if (isTimerActive) {
             return;
         }
         
         _currentIndex = 0;
-        _isTimerRunning = true;
-        var variable = _sequenceNumbers.indexOf(_currentIndex);
-        _timeRemaining = variable * _minutesInt; // Convert minutes to seconds
+        isTimerActive = true;
+        var variable = sequenceNumbers.indexOf(_currentIndex);
+        _timeRemaining = variable * _secondsInt; // Convert minutes to seconds
         
         // Update the view to show first countdown
-        _view.updateCountdown(_timeRemaining, _sequenceNumbers.indexOf(_currentIndex));
+        _view.updateCountdown(_timeRemaining, sequenceNumbers.indexOf(_currentIndex));
         
         // Start a timer that ticks every second
-        _sequenceTimer.start(method(:timerCallback), 1000, true);
+        sequenceTimer.start(method(:timerCallback), 1000, true);
     }
     
     // Stop the timer sequence
     function stopSequence() {
-        if (_isTimerRunning) {
-            _sequenceTimer.stop();
-            _isTimerRunning = false;
+        if (isTimerActive) {
+            sequenceTimer.stop();
+            isTimerActive = false;
             _view.showStoppedState();
         }
     }
@@ -82,7 +82,7 @@ class SequenceAlertsApp extends Application.AppBase {
         _timeRemaining--;
         
         // Update the view with the new time
-        _view.updateCountdown(_timeRemaining, _sequenceNumbers.indexOf(_currentIndex));
+        _view.updateCountdown(_timeRemaining, sequenceNumbers.indexOf(_currentIndex));
         
         // If the timer reaches zero, trigger the alarm and move to next number in sequence
         if (_timeRemaining <= 0) {
@@ -92,15 +92,15 @@ class SequenceAlertsApp extends Application.AppBase {
             _currentIndex++;
             
             // If we've completed the sequence, stop the timer
-            if (_currentIndex >= _sequenceNumbers.size()) {
-                _sequenceTimer.stop();
-                _isTimerRunning = false;
+            if (_currentIndex >= sequenceNumbers.size()) {
+                sequenceTimer.stop();
+                isTimerActive = false;
                 _view.showCompletedState();
                 return;
             }
             
             // Start the next interval
-            _timeRemaining = _sequenceNumbers.indexOf(_currentIndex) * _minutesInt; // Convert minutes to seconds
+            _timeRemaining = sequenceNumbers.indexOf(_currentIndex) * _secondsInt; // Convert minutes to seconds
         }
     }
     
@@ -111,19 +111,19 @@ class SequenceAlertsApp extends Application.AppBase {
         }
         
         // Show alert on screen
-        _view.showAlert(_currentIndex, _sequenceNumbers.size());
+        _view.showAlert(_currentIndex, sequenceNumbers.size());
         
         // If there's another interval, show what's coming next
-        if (_currentIndex < _sequenceNumbers.size() - 1) {
-            _view.showNextInterval(_sequenceNumbers.indexOf(_currentIndex + 1));
+        if (_currentIndex < sequenceNumbers.size() - 1) {
+            _view.showNextInterval(sequenceNumbers.indexOf(_currentIndex + 1));
         }
     }
     
     // Allow user to customize the sequence
     function setSequence(newSequence) {
-        if (!_isTimerRunning && newSequence != null && newSequence.size() > 0) {
-            _sequenceNumbers = newSequence;
-            _view.updateSequenceDisplay(_sequenceNumbers);
+        if (!isTimerActive && newSequence != null && newSequence.size() > 0) {
+            sequenceNumbers = newSequence;
+            _view.updateSequenceDisplay(sequenceNumbers);
         }
     }
 }

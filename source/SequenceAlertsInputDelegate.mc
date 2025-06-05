@@ -1,8 +1,8 @@
 using Toybox.Application;
-using Toybox.WatchUi;
-using Toybox.Timer;
-using Toybox.System;
 using Toybox.Attention;
+using Toybox.System;
+using Toybox.Timer;
+using Toybox.WatchUi;
 
 // Input handler for button presses
 class SequenceAlertsInputDelegate extends WatchUi.InputDelegate {
@@ -16,7 +16,7 @@ class SequenceAlertsInputDelegate extends WatchUi.InputDelegate {
         
         if (key == WatchUi.KEY_ENTER || key == WatchUi.KEY_START) {
             // Start/Stop button
-            if (!Application.getApp()._isTimerRunning) {
+            if (!Application.getApp().isTimerActive) {
                 Application.getApp().startSequence();
             } else {
                 Application.getApp().stopSequence();

@@ -13,17 +13,17 @@ class SequenceAlertsView extends WatchUi.View {
 
     // Load resources
     function onLayout(dc) {
-        setLayout(Rez.Layouts.MainLayout(dc));
+        setLayout(Rez.Layouts.StartLayout(dc));
         
-        _timerLabel = findDrawableById("TimerLabel");
-        _sequenceLabel = findDrawableById("SequenceLabel");
-        _statusLabel = findDrawableById("StatusLabel");
+        _timerLabel = findDrawableById("LabelTimer");
+        _sequenceLabel = findDrawableById("LabelSequence");
+        _statusLabel = findDrawableById("LabelStatus");
         
         // Initialize display
         _timerLabel.setText("Ready");
         _statusLabel.setText("Press Start");
-        var something = Application.getApp()._sequenceNumbers;
-        updateSequenceDisplay(something);
+        var numberValues = Application.getApp().sequenceNumbers;
+        updateSequenceDisplay(numberValues);
     }
 
     // Update the display with the current countdown
@@ -38,10 +38,11 @@ class SequenceAlertsView extends WatchUi.View {
     
     // Display the sequence to the user
     function updateSequenceDisplay(sequence) {
+        var sequenceSize = sequence.size() -1;
         var seqText = "";
-        for (var i = 0; i < sequence.size(); i++) {
-            seqText += sequence.indexOf(i).toString();
-            if (i < sequence.size() - 1) {
+        for (var i = 0; i <= sequenceSize; i++) {
+            seqText += sequence[i].toString();
+            if (i < sequenceSize) {
                 seqText += ", ";
             }
         }
