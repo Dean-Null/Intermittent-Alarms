@@ -2,9 +2,9 @@
     <string id="AppName">SequenceAlerts</string>
     <string id="AppEntry">SequenceAlertsApp</string>
     <string id="Prompt">Click Menu button</string>
-    <string id="MenuLabel1">Drink</string>
-    <string id="MenuLabel2">Chewie</string>
-    <string id="MenuLabel3">Atomize</string>
+    <string id="MenuLabel1">Option 1</string>
+    <string id="MenuLabel2">Option 2</string>
+    <string id="MenuLabel3">Option 3</string>
     <string id="TimerLabel">Start</string>
     <string id="TimerButton">Stop</string>
 </strings>
