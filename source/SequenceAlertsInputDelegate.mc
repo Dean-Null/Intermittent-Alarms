@@ -24,6 +24,7 @@ class SequenceAlertsInputDelegate extends WatchUi.InputDelegate {
             return true;
         } else if (key == WatchUi.KEY_MENU) {
             // Explicitly handle menu button for older API levels
+            // Menu button is a long press on the lower right button
             return Application.getApp().onMenu();
         }
         
