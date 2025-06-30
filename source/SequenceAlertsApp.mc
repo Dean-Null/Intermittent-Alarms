@@ -1,26 +1,36 @@
-using Toybox.Application;
-using Toybox.Attention;
-using Toybox.System;
-using Toybox.Timer;
-using Toybox.WatchUi;
+using Toybox.Application as App;
+import Toybox.Attention;
+import Toybox.System;
+import Toybox.Timer;
+import Toybox.WatchUi;
+import Toybox.Lang;
 
-class SequenceAlertsApp extends Application.AppBase {
+class SequenceAlertsApp extends App.AppBase {
     public var sequenceTimer;
-    public var sequenceNumbers;
+    public var sequenceNumbers as Array;
     public var isTimerActive;
 
     private var _view;
     private var _timeRemaining;
     private var _delegate;
     private var _currentIndex = 0;
-    private var _secondsInt = 60;
+    private const _secondsInt = 60;
 
     function initialize() {
         AppBase.initialize();
+
+        System.println("Welcome to MonkeyC");
         // Example Fibonacci sequence in minutes
         sequenceNumbers = [1, 2, 3, 5, 8, 13];
         isTimerActive = false;
         sequenceTimer = new Timer.Timer();
+
+        // A symbol? 
+        var person = { :firstName=>"Bob", :lastName=>"Jones" };
+        var trueFalse = person.hasKey("firstName");
+        if (trueFalse) {
+            System.println("Welcome to MonkeyC");
+        }
     }
 
     // onStart() is called on application start up
@@ -78,7 +88,7 @@ class SequenceAlertsApp extends Application.AppBase {
     }
     
     // Timer callback function that runs every second
-    function timerCallback() {
+    function timerCallback(sequenceNumbers as Array) {
         _timeRemaining--;
         
         // Update the view with the new time

@@ -1,5 +1,7 @@
 import Toybox.Graphics;
 import Toybox.WatchUi;
+import Toybox.System;
+import Toybox.Lang;
 
 // Main View class for the application
 class SequenceAlertsView extends WatchUi.View {
@@ -12,7 +14,7 @@ class SequenceAlertsView extends WatchUi.View {
     }
 
     // Load resources
-    function onLayout(dc) {
+    function onLayout(dc as Dc) {
         setLayout(Rez.Layouts.StartLayout(dc));
         
         _timerLabel = findDrawableById("LabelTimer");
@@ -26,6 +28,20 @@ class SequenceAlertsView extends WatchUi.View {
         updateSequenceDisplay(numberValues);
     }
 
+    // Display the sequence to the user
+    function updateSequenceDisplay(sequence as Array) as Void{
+        var seqText = "";
+        for (var index = 0; index < sequence.size(); index++) {
+            // Is this really needed?
+            seqText += sequence[index].toString();
+            if (index < sequence.size()) {
+                seqText += ", ";
+            }   
+        }
+        _sequenceLabel.setText(seqText);
+        WatchUi.requestUpdate();
+    }
+
     // Update the display with the current countdown
     function updateCountdown(seconds, currentMinutes) {
         var minutes = seconds / 60;
@@ -33,20 +49,6 @@ class SequenceAlertsView extends WatchUi.View {
         
         _timerLabel.setText(minutes.format("%d") + ":" + secs.format("%02d"));
         _statusLabel.setText("Current: " + currentMinutes + " min");
-        WatchUi.requestUpdate();
-    }
-    
-    // Display the sequence to the user
-    function updateSequenceDisplay(sequence) {
-        var sequenceSize = sequence.size() -1;
-        var seqText = "";
-        for (var i = 0; i <= sequenceSize; i++) {
-            seqText += sequence[i].toString();
-            if (i < sequenceSize) {
-                seqText += ", ";
-            }
-        }
-        _sequenceLabel.setText(seqText);
         WatchUi.requestUpdate();
     }
     

@@ -1,8 +1,8 @@
-using Toybox.Application;
-using Toybox.WatchUi;
-using Toybox.Timer;
-using Toybox.System;
-using Toybox.Attention;
+import Toybox.Application;
+import Toybox.WatchUi;
+import Toybox.Timer;
+import Toybox.System;
+import Toybox.Attention;
 
 // Settings menu for customizing the sequence
 class SequenceAlertsSettingsMenu extends WatchUi.Menu2 {
