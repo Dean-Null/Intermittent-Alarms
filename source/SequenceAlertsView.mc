@@ -13,8 +13,8 @@ class SequenceAlertsView extends WatchUi.View {
         View.initialize();
     }
 
-    // Load resources
-    function onLayout(dc as Dc) {
+    // Load your resources here
+    function onLayout(dc as Dc) as Void {
         setLayout(Rez.Layouts.StartLayout(dc));
         
         _timerLabel = findDrawableById("LabelTimer");
@@ -43,7 +43,7 @@ class SequenceAlertsView extends WatchUi.View {
     }
 
     // Update the display with the current countdown
-    function updateCountdown(seconds, currentMinutes) {
+    function updateCountdown(seconds, currentMinutes) as Void {
         var minutes = seconds / 60;
         var secs = seconds % 60;
         
@@ -53,37 +53,35 @@ class SequenceAlertsView extends WatchUi.View {
     }
     
     // Show alert when an interval completes
-    function showAlert(completedIndex, totalIntervals) {
+    function showAlert(completedIndex, totalIntervals) as Void {
         _statusLabel.setText("INTERVAL " + (completedIndex + 1) + "/" + totalIntervals + " COMPLETE!");
         WatchUi.requestUpdate();
     }
     
     // Show info about the next interval
-    function showNextInterval(nextMinutes) {
+    function showNextInterval(nextMinutes) as Void {
         _statusLabel.setText("Next: " + nextMinutes + " min");
         WatchUi.requestUpdate();
     }
     
     // Display stopped state
-    function showStoppedState() {
+    function showStoppedState() as Void {
         _timerLabel.setText("Stopped");
         _statusLabel.setText("Press Start");
         WatchUi.requestUpdate();
     }
     
     // Display completed state
-    function showCompletedState() {
+    function showCompletedState() as Void {
         _timerLabel.setText("Done!");
         _statusLabel.setText("Sequence Complete");
         WatchUi.requestUpdate();
     }
     
-    // Called when the view is shown
-    function onShow() {
-    }
-
-    // Called when the view is hidden
-    function onHide() {
+    // Called when this View is brought to the foreground. Restore
+    // the state of this View and prepare it to be shown. This includes
+    // loading resources into memory.
+    function onShow() as Void {
     }
 
     // Update the view
@@ -91,4 +89,11 @@ class SequenceAlertsView extends WatchUi.View {
         // Call the parent onUpdate function to redraw the layout
         View.onUpdate(dc);
     }
+
+    // Called when this View is removed from the screen. Save the
+    // state of this View here. This includes freeing resources from
+    // memory.
+    function onHide() as Void {
+    }
+
 }

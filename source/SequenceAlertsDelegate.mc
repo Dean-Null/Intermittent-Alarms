@@ -1,17 +1,14 @@
-using Toybox.Application;
-using Toybox.Attention;
-using Toybox.System;
-using Toybox.Timer;
-using Toybox.WatchUi;
+import Toybox.WatchUi;
+import Toybox.Lang;
 
 // Input handler for button presses
-class SequenceAlertsInputDelegate extends WatchUi.InputDelegate {
+class SequenceAlertsDelegate extends WatchUi.BehaviorDelegate {
     function initialize() {
-        InputDelegate.initialize();
+        BehaviorDelegate.initialize();
     }
 
     // Handle button presses
-    function onKey(keyEvent) {
+    function onKey(keyEvent) as Boolean{
         var key = keyEvent.getKey();
         
         if (key == WatchUi.KEY_ENTER || key == WatchUi.KEY_START) {
@@ -32,7 +29,8 @@ class SequenceAlertsInputDelegate extends WatchUi.InputDelegate {
     }
     
     // Add explicit menu event handler for API compatibility
-    function onMenu() {
-        return Application.getApp().onMenu();
+    function onMenu() as Boolean {
+        WatchUi.pushView(new Rez.Menus.SecondMenu(), new SequenceAlertsMenuDelegate(), WatchUi.SLIDE_UP);
+        return true;
     }
 }

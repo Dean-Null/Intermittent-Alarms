@@ -1,18 +1,17 @@
-using Toybox.Application as App;
+import Toybox.Application;
 import Toybox.Attention;
 import Toybox.System;
 import Toybox.Timer;
 import Toybox.WatchUi;
 import Toybox.Lang;
 
-class SequenceAlertsApp extends App.AppBase {
+class SequenceAlertsApp extends Application.AppBase {
     public var sequenceTimer;
     public var sequenceNumbers as Array;
     public var isTimerActive;
 
     private var _view;
     private var _timeRemaining;
-    private var _delegate;
     private var _currentIndex = 0;
     private const _secondsInt = 60;
 
@@ -34,25 +33,26 @@ class SequenceAlertsApp extends App.AppBase {
     }
 
     // onStart() is called on application start up
-    function onStart(state) as Void {
+    function onStart(state as Dictionary?) as Void {
     }
 
     // onStop() is called when your application is exiting
-    function onStop(state) as Void {
+    function onStop(state as Dictionary?) as Void {
         if (isTimerActive) {
             sequenceTimer.stop();
         }
     }
 
     // Return the initial view of your application
-    function getInitialView() {
-        _view = new SequenceAlertsView();
-        _delegate = new SequenceAlertsInputDelegate();
-        return [_view, _delegate];
+    function getInitialView() as [Views] or [Views, InputDelegates] {
+        return [new SequenceAlertsView(), new SequenceAlertsDelegate() ];
     }
     
+    function getApp() as SequenceAlertsApp {
+        return Application.getApp() as SequenceAlertsApp;
+    }
     // Handle menu button press - needed for API level compatibility
-    function onMenu() {
+    function onMenu() as Boolean {
         var menu = new SequenceAlertsSettingsMenu();
         var menuDelegate = new SequenceAlertsMenuDelegate();
         WatchUi.pushView(menu, menuDelegate, WatchUi.SLIDE_UP);
@@ -60,7 +60,7 @@ class SequenceAlertsApp extends App.AppBase {
     }
     
     // Start the timer sequence
-    function startSequence() {
+    function startSequence() as Void {
         if (isTimerActive) {
             return;
         }
@@ -79,7 +79,7 @@ class SequenceAlertsApp extends App.AppBase {
     }
     
     // Stop the timer sequence
-    function stopSequence() {
+    function stopSequence() as Void {
         if (isTimerActive) {
             sequenceTimer.stop();
             isTimerActive = false;
@@ -88,7 +88,7 @@ class SequenceAlertsApp extends App.AppBase {
     }
     
     // Timer callback function that runs every second
-    function timerCallback(sequenceNumbers as Array) {
+    function timerCallback(sequenceNumbers as Array) as Void {
         _timeRemaining--;
         
         // Update the view with the new time
@@ -115,7 +115,7 @@ class SequenceAlertsApp extends App.AppBase {
     }
     
     // Trigger the alarm with vibration and display alert
-    function triggerAlarm() {
+    function triggerAlarm() as Void {
         if (Attention has :vibrate) {
             Attention.vibrate([new Attention.VibeProfile(100, 1000)]);
         }
@@ -131,7 +131,7 @@ class SequenceAlertsApp extends App.AppBase {
     }
     
     // Allow user to customize the sequence
-    function setSequence(newSequence) {
+    function setSequence(newSequence) as Void {
         if (!isTimerActive && newSequence != null && newSequence.size() > 0) {
             sequenceNumbers = newSequence;
             _view.updateSequenceDisplay(sequenceNumbers);
