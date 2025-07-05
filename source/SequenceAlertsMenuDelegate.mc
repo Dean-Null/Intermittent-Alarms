@@ -10,10 +10,13 @@ class SequenceAlertsMenuDelegate extends WatchUi.Menu2InputDelegate {
     private const _generic = [5, 10, 15, 10, 5 ];
     
     function initialize() {
+        System.println("Intializing Menu Delegate");
         Menu2InputDelegate.initialize();
+        System.println("---menu delegate initialized");
     }
 
     function setArray(id) as Void {
+        System.println("Set Sequence Array");
         switch (id) {
             case "fibonacci":
                 Application.getApp().setSequence(_fibonacci);
@@ -30,6 +33,7 @@ class SequenceAlertsMenuDelegate extends WatchUi.Menu2InputDelegate {
         }
 
         WatchUi.popView(WatchUi.SLIDE_RIGHT);
+        System.println("---sequence array has been set");
         // v Had an error because no return is expected
         //return true;
     }
