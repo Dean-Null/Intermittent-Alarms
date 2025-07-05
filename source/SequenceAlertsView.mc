@@ -43,7 +43,7 @@ class SequenceAlertsView extends WatchUi.View {
     }
 
     // Update the display with the current countdown
-    function updateCountdown(seconds, currentMinutes) as Void {
+    function updateCountdown(seconds as Number, currentMinutes as Number) as Void {
         var minutes = seconds / 60;
         var secs = seconds % 60;
         
@@ -53,13 +53,13 @@ class SequenceAlertsView extends WatchUi.View {
     }
     
     // Show alert when an interval completes
-    function showAlert(completedIndex, totalIntervals) as Void {
+    function showAlert(completedIndex as Number, totalIntervals as Number) as Void {
         _statusLabel.setText("INTERVAL " + (completedIndex + 1) + "/" + totalIntervals + " COMPLETE!");
         WatchUi.requestUpdate();
     }
     
     // Show info about the next interval
-    function showNextInterval(nextMinutes) as Void {
+    function showNextInterval(nextMinutes as Number) as Void {
         _statusLabel.setText("Next: " + nextMinutes + " min");
         WatchUi.requestUpdate();
     }

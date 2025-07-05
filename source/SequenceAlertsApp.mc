@@ -1,19 +1,20 @@
 import Toybox.Application;
 import Toybox.Attention;
+import Toybox.Lang;
 import Toybox.System;
 import Toybox.Timer;
 import Toybox.WatchUi;
-import Toybox.Lang;
 
 class SequenceAlertsApp extends Application.AppBase {
-    public var sequenceTimer;
-    public var sequenceNumbers as Array = [1, 2, 3, 5, 8, 13];
     public var isTimerActive = false;
-
-    private var _view;
-    private var _timeRemaining;
-    private var _currentIndex = 0;
+    public var sequenceNumbers as Array = [1, 2, 3, 5, 8, 13];
+    public var sequenceTimer;
+    
     private const _secondsInt = 60;
+
+    private var _currentIndex = 0;
+    private var _timeRemaining;
+    private var _view;
 
     function initialize() {
         AppBase.initialize();
@@ -84,7 +85,7 @@ class SequenceAlertsApp extends Application.AppBase {
         _timeRemaining--;
         
         // Update the view with the new time
-        _view.updateCountdown(_timeRemaining, sequenceNumbers[_currentIndex]);
+        //_view.updateCountdown(_timeRemaining, sequenceNumbers[_currentIndex]);
         
         // If the timer reaches zero, trigger the alarm and move to next number in sequence
         if (_timeRemaining <= 0) {
@@ -97,7 +98,7 @@ class SequenceAlertsApp extends Application.AppBase {
             if (_currentIndex >= sequenceNumbers.size()) {
                 sequenceTimer.stop();
                 isTimerActive = false;
-                _view.showCompletedState();
+                //_view.showCompletedState();
                 return;
             }
             
@@ -118,7 +119,7 @@ class SequenceAlertsApp extends Application.AppBase {
         // If there's another interval, show what's coming next
         if (_currentIndex < sequenceNumbers.size() - 1) {
             var currentIndexValue = sequenceNumbers[_currentIndex];
-            _view.showNextInterval(currentIndexValue);
+            //_view.showNextInterval(currentIndexValue);
         }
     }
     
@@ -126,7 +127,7 @@ class SequenceAlertsApp extends Application.AppBase {
     function setSequence(newSequence) as Void {
         if (!isTimerActive && newSequence != null && newSequence.size() > 0) {
             sequenceNumbers = newSequence;
-            _view.updateSequenceDisplay(sequenceNumbers);
+            //_view.updateSequenceDisplay(sequenceNumbers);
         }
     }
 }

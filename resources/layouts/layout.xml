@@ -1,8 +1,8 @@
 <layout id="StartLayout" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://developer.garmin.com/downloads/connect-iq/resources.xsd">
     <bitmap 
         id="ImageCenter" 
-        x="center" y="25" 
-        filename="../drawables/monkey.png" 
+        x="center" y="50" 
+        filename="../drawables/garmin_watch_small_icon.png" 
     />
     <label 
         id="LabelMenuButton" 
