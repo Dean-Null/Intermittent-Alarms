@@ -7,8 +7,8 @@ import Toybox.Lang;
 
 class SequenceAlertsApp extends Application.AppBase {
     public var sequenceTimer;
-    public var sequenceNumbers as Array;
-    public var isTimerActive;
+    public var sequenceNumbers = [1, 2, 3, 5, 8, 13] as Array;
+    public var isTimerActive = false;
 
     private var _view;
     private var _timeRemaining;
@@ -17,19 +17,10 @@ class SequenceAlertsApp extends Application.AppBase {
 
     function initialize() {
         AppBase.initialize();
-
         System.println("Welcome to MonkeyC");
         // Example Fibonacci sequence in minutes
-        sequenceNumbers = [1, 2, 3, 5, 8, 13];
         isTimerActive = false;
         sequenceTimer = new Timer.Timer();
-
-        // A symbol? 
-        var person = { :firstName=>"Bob", :lastName=>"Jones" };
-        var trueFalse = person.hasKey("firstName");
-        if (trueFalse) {
-            System.println("Welcome to MonkeyC");
-        }
     }
 
     // onStart() is called on application start up

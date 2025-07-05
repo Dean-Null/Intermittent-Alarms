@@ -13,20 +13,6 @@ class SequenceAlertsMenuDelegate extends WatchUi.MenuInputDelegate {
         MenuInputDelegate.initialize();
     }
 
-    function onMenuItem(item as Symbol) as Void {
-        if (item == :item_1) {
-            System.println("item 1");
-        } else if (item == :item_2) {
-            System.println("item 2");
-        }
-    }
-    
-    function onSelect(item) as Void {
-        var id = item.getId();
-        setArray(id);
-        WatchUi.popView(WatchUi.SLIDE_RIGHT);
-    }
-
     private function setArray(id) as Void {
         switch (id) {
             case "fibonacci":

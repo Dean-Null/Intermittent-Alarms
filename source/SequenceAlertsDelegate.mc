@@ -2,9 +2,9 @@ import Toybox.WatchUi;
 import Toybox.Lang;
 
 // Input handler for button presses
-class SequenceAlertsDelegate extends WatchUi.BehaviorDelegate {
+class SequenceAlertsDelegate extends WatchUi.InputDelegate {
     function initialize() {
-        BehaviorDelegate.initialize();
+        InputDelegate.initialize();
     }
 
     // Handle button presses
