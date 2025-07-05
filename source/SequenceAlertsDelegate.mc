@@ -30,7 +30,7 @@ class SequenceAlertsDelegate extends WatchUi.InputDelegate {
     
     // Add explicit menu event handler for API compatibility
     function onMenu() as Boolean {
-        WatchUi.pushView(new Rez.Menus.SecondMenu(), new SequenceAlertsMenuDelegate(), WatchUi.SLIDE_UP);
+        WatchUi.pushView(new Rez.Menus.MainMenu(), new SequenceAlertsMenuDelegate(), WatchUi.SLIDE_UP);
         return true;
     }
 }

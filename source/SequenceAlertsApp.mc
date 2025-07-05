@@ -7,7 +7,7 @@ import Toybox.Lang;
 
 class SequenceAlertsApp extends Application.AppBase {
     public var sequenceTimer;
-    public var sequenceNumbers = [1, 2, 3, 5, 8, 13] as Array;
+    public var sequenceNumbers as Array = [1, 2, 3, 5, 8, 13];
     public var isTimerActive = false;
 
     private var _view;
@@ -42,6 +42,7 @@ class SequenceAlertsApp extends Application.AppBase {
     function getApp() as SequenceAlertsApp {
         return Application.getApp() as SequenceAlertsApp;
     }
+    
     // Handle menu button press - needed for API level compatibility
     function onMenu() as Boolean {
         var menu = new SequenceAlertsSettingsMenu();

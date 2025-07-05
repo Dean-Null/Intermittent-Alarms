@@ -95,5 +95,4 @@ class SequenceAlertsView extends WatchUi.View {
     // memory.
     function onHide() as Void {
     }
-
 }
