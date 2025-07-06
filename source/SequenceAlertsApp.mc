@@ -6,9 +6,9 @@ import Toybox.Timer;
 import Toybox.WatchUi;
 
 class SequenceAlertsApp extends Application.AppBase {
+    var currentTimer;
     var isActive as Boolean?;
     var currentSeq as Array?;
-    var currentTimer;
     var inSeconds as Number?;
     var currentIndex as Number?;
     var secSum as Number?;
@@ -66,10 +66,10 @@ class SequenceAlertsApp extends Application.AppBase {
     }
     
     // Start the timer sequence
-    function startSequence() as Void {
+    function startSequence() as Boolean {
         System.println("Starting Timer Sequence");
         if (isActive) {
-            return;
+            return false;
         }
         
         currentIndex = 0;
@@ -84,17 +84,20 @@ class SequenceAlertsApp extends Application.AppBase {
         // Start a timer that ticks every second
         currentTimer.start(method(:timerCallback), 1000, true);
         System.println("---timer sequence has started");
+        return true;
     }
     
     // Stop the timer sequence
-    function stopSequence() as Void {
+    function stopSequence() as Boolean {
         System.println("Stop timer sequence");
         if (isActive) {
             currentTimer.stop();
             isActive = false;
             baseView.showStoppedState();
+            return true;
         }
         System.println("---timer sequence has stopped");
+        return false;
     }
     
     // Timer callback function that runs every second

@@ -32,7 +32,31 @@ class SequenceAlertsView extends WatchUi.View {
         System.println("---method completed");
     }
 
+    // Called when this View is brought to the foreground. Restore
+    // the state of this View and prepare it to be shown. This includes
+    // loading resources into memory.
+    function onShow() as Void {
+        System.println("onShow on view is blank");
+        System.println("---onshow on view is blank");
+    }
+
+    // Update the view
+    function onUpdate(dc as Dc) as Void {
+        System.println("onUpdate on view");
+        // Call the parent onUpdate function to redraw the layout
+        //View.onUpdate(dc);
+        System.println("---onupdate onview");
+    }
     // Display the sequence to the user
+
+    // Called when this View is removed from the screen. Save the
+    // state of this View here. This includes freeing resources from
+    // memory.
+    function onHide() as Void {
+        System.println("onHide is blank");
+        System.println("---onhide is blank");
+    }
+
     function updateSequenceDisplay(sequence as Array) as Void{
         System.println("Updating Sequence Display");
         var seqText = "";
@@ -93,28 +117,5 @@ class SequenceAlertsView extends WatchUi.View {
         WatchUi.requestUpdate();
         System.println("---complete state hase been shown");
     }
-    
-    // Called when this View is brought to the foreground. Restore
-    // the state of this View and prepare it to be shown. This includes
-    // loading resources into memory.
-    function onShow() as Void {
-        System.println("onShow on view is blank");
-        System.println("---onshow on view is blank");
-    }
 
-    // Update the view
-    function onUpdate(dc as Dc) as Void {
-        System.println("onUpdate on view");
-        // Call the parent onUpdate function to redraw the layout
-        View.onUpdate(dc);
-        System.println("---onupdate onview");
-    }
-
-    // Called when this View is removed from the screen. Save the
-    // state of this View here. This includes freeing resources from
-    // memory.
-    function onHide() as Void {
-        System.println("onHide is blank");
-        System.println("---onhide is blank");
-    }
 }

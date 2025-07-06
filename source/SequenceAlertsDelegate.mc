@@ -12,20 +12,22 @@ class SequenceAlertsDelegate extends WatchUi.InputDelegate {
     // Handle button presses
     function onKey(keyEvent) as Boolean{
         System.println("Broh should this even be started");
-        var key = keyEvent.getKey();
-        
-        if (key == WatchUi.KEY_ENTER || key == WatchUi.KEY_START) {
-            // Start/Stop button
-            if (!Application.getApp().isActive()) {
-                Application.getApp().startSequence();
-            } else {
-                Application.getApp().stopSequence();
-            }
-            return true;
-        } else if (key == WatchUi.KEY_MENU) {
-            // Explicitly handle menu button for older API levels
-            // Menu button is a long press on the lower right button
-            return Application.getApp().onMenu();
+        switch (keyEvent.getKey()) {
+            case WatchUi.KEY_ENTER:
+            case WatchUi.KEY_START:
+                System.println("Start or Enter key was pressed");
+                if (!Application.getApp().isActive()) {
+                    System.println("Is active start sequence");
+                    return Application.getApp().startSequence();
+                } else {
+                    System.println("is not active stopping sequence");
+                    return Application.getApp().stopSequence();
+                }
+                case WatchUi.KEY_MENU:
+                System.println("Meny key was pressed");
+                return Application.getApp().onMenu();
+            default:
+                break;
         }
         
         System.println("---onkey has ended");
