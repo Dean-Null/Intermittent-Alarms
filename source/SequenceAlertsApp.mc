@@ -28,7 +28,7 @@ class SequenceAlertsApp extends Application.AppBase {
         System.println("Starting App - setting class fields");
         
         currentIndex = 0;
-        currentSeq = constVar.seqSet;
+        currentSeq = constVar.fibonacci;
         inSeconds = constVar.minuteInSeconds;
         secSum = 0;
         currentTimer = new Timer.Timer();
@@ -132,7 +132,7 @@ class SequenceAlertsApp extends Application.AppBase {
             if (currentIndex >= currentSeq.size()) {
                 currentTimer.stop();
                 isActive = false;
-                //baseView.showCompletedState();
+                baseView.showCompletedState();
                 return;
             }
             
@@ -146,6 +146,7 @@ class SequenceAlertsApp extends Application.AppBase {
     // Trigger the alarm with vibration and display alert
     function triggerAlarm() as Void {
         System.println("Trigger and alarm based on the device");
+        
         if (Attention has :vibrate) {
             System.println("Vibrate is an option");
             Attention.vibrate([new Attention.VibeProfile(100, 1000)]);
@@ -166,10 +167,12 @@ class SequenceAlertsApp extends Application.AppBase {
     // Allow user to customize the sequence
     function setSequence(newSequence as Array) as Void {
         System.println("Set Sequence for the next alarms");
+        
         if (!isActive && newSequence != null && newSequence.size() > 0) {
             currentSeq = newSequence;
-            //baseView.updateSequenceDisplay(currentSeq);
+            baseView.updateSequenceDisplay(currentSeq);
         }
+
         System.println("---sequence has been set");
     }
 }

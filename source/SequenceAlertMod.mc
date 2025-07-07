@@ -1,7 +1,8 @@
 import Toybox.Lang;
 
 module constVar{
-    const seqSet as Array = [1, 2, 3, 5, 8, 13];
+    const minuteInSeconds as Number = 60;
+    
     const fibonacci as Array = [1, 2, 3, 5, 8, 13];
     const strFib = "fibonacci";
     const countingUp as Array = [1, 2, 3, 4, 5];
@@ -10,7 +11,6 @@ module constVar{
     const strCdown = "countingDown";
     const generic as Array = [5, 10, 15, 10, 5 ];
     const strGen = "generic";
-    const minuteInSeconds as Number = 60;
 
     const strLblTimer as String = "LabelTimer";
     const strLblSeq as String = "LabelSequence";
