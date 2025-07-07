@@ -79,7 +79,7 @@ class SequenceAlertsApp extends Application.AppBase {
         secSum = currentSeq[currentIndex] * inSeconds; 
         
         // Update the view to show first countdown
-        baseView.updateCountdown(secSum, currentSeq[currentIndex]);
+        baseView.onUpdate(secSum, currentSeq[currentIndex]);
         
         // Start a timer that ticks every second
         currentTimer.start(method(:timerCallback), 1000, true);

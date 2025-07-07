@@ -3,6 +3,7 @@ import Toybox.Lang;
 
 // Input handler for button presses
 class SequenceAlertsDelegate extends WatchUi.InputDelegate {
+    
     function initialize() {
         System.println("Initialize App Base Delegate");
         InputDelegate.initialize();

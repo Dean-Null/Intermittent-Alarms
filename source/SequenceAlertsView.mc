@@ -20,13 +20,18 @@ class SequenceAlertsView extends WatchUi.View {
         System.println("On Layout method");
         setLayout(Rez.Layouts.StartLayout(dc));
         
+        // _timerLabel = findDrawableById(constVar.strLblTimer);
         _timerLabel = findDrawableById("LabelTimer");
+        // _sequenceLabel = findDrawableById(constVar.strLblSeq);
         _sequenceLabel = findDrawableById("LabelSequence");
+        // _statusLabel = findDrawableById(constVar.strLblStatus);
         _statusLabel = findDrawableById("LabelStatus");
         
         // Initialize display
         _timerLabel.setText("Ready");
         _statusLabel.setText("Press Start");
+        // _timerLabel.setText(constVar.strTxtReady);
+        // _statusLabel.setText(constVar.strTxtStart);
         var numberValues = Application.getApp().currentSeq;
         updateSequenceDisplay(numberValues);
         System.println("---method completed");
@@ -75,8 +80,8 @@ class SequenceAlertsView extends WatchUi.View {
     // Update the display with the current countdown
     function updateCountdown(seconds as Number, currentMinutes as Number) as Void {
         System.println("Update Countdown");
-        var minutes = seconds / 60;
-        var secs = seconds % 60;
+        var minutes = seconds / constVar.minuteInSeconds;
+        var secs = seconds % constVar.minuteInSeconds;
         
         _timerLabel.setText(minutes.format("%d") + ":" + secs.format("%02d"));
         _statusLabel.setText("Current: " + currentMinutes + " min");
@@ -103,8 +108,8 @@ class SequenceAlertsView extends WatchUi.View {
     // Display stopped state
     function showStoppedState() as Void {
         System.println("Show Stopped state");
-        _timerLabel.setText("Stopped");
-        _statusLabel.setText("Press Start");
+        _timerLabel.setText(constVar.strTxtStop);
+        _statusLabel.setText(constVar.strTxtStart);
         WatchUi.requestUpdate();
         System.println("---stopped state has been shown");
     }
@@ -112,8 +117,8 @@ class SequenceAlertsView extends WatchUi.View {
     // Display completed state
     function showCompletedState() as Void {
         System.println("show the completed state");
-        _timerLabel.setText("Done!");
-        _statusLabel.setText("Sequence Complete");
+        _timerLabel.setText(constVar.strTxtDone);
+        _statusLabel.setText(constVar.strTxtComplete);
         WatchUi.requestUpdate();
         System.println("---complete state hase been shown");
     }
