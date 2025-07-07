@@ -20,20 +20,22 @@ class SequenceAlertsView extends WatchUi.View {
         System.println("On Layout method");
         setLayout(Rez.Layouts.StartLayout(dc));
         
-        // _timerLabel = findDrawableById(constVar.strLblTimer);
         _timerLabel = findDrawableById("LabelTimer");
-        // _sequenceLabel = findDrawableById(constVar.strLblSeq);
         _sequenceLabel = findDrawableById("LabelSequence");
-        // _statusLabel = findDrawableById(constVar.strLblStatus);
         _statusLabel = findDrawableById("LabelStatus");
+
+        // _timerLabel = findDrawableById(constVar.strLblTimer);
+        // _sequenceLabel = findDrawableById(constVar.strLblSeq);
+        // _statusLabel = findDrawableById(constVar.strLblStatus);
         
         // Initialize display
         _timerLabel.setText("Ready");
         _statusLabel.setText("Press Start");
+
         // _timerLabel.setText(constVar.strTxtReady);
         // _statusLabel.setText(constVar.strTxtStart);
-        var numberValues = Application.getApp().currentSeq;
-        updateSequenceDisplay(numberValues);
+
+        updateSequenceDisplay(Application.getApp().currentSeq);
         System.println("---method completed");
     }
 
@@ -48,8 +50,10 @@ class SequenceAlertsView extends WatchUi.View {
     // Update the view
     function onUpdate(dc as Dc) as Void {
         System.println("onUpdate on view");
+
         // Call the parent onUpdate function to redraw the layout
-        //View.onUpdate(dc);
+        View.onUpdate(dc);
+        
         System.println("---onupdate onview");
     }
     // Display the sequence to the user
