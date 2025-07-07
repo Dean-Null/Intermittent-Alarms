@@ -6,8 +6,8 @@ import Toybox.Timer;
 import Toybox.WatchUi;
 
 class SequenceAlertsApp extends Application.AppBase {
-    var currentTimer;
-    var isActive as Boolean?;
+    var currentTimer as Timer.Timer?;
+    var isActive as Boolean = false;
     var currentSeq as Array?;
     var inSeconds as Number?;
     var currentIndex as Number?;
@@ -26,40 +26,50 @@ class SequenceAlertsApp extends Application.AppBase {
     function onStart(state as Dictionary?) as Void {
         // Example Fibonacci sequence in minutes
         System.println("Starting App - setting class fields");
+        
         currentIndex = 0;
         currentSeq = constVar.seqSet;
         inSeconds = constVar.minuteInSeconds;
         secSum = 0;
         currentTimer = new Timer.Timer();
+
         System.println("---start complete");
     }
 
     // onStop() is called when your application is exiting
     function onStop(state as Dictionary?) as Void {
         System.println("Closing App");
+
         if (isActive) {
             System.println("Stopping timer");
             currentTimer.stop();
         }
+
         System.println("--- closed app");
     }
 
     // Return the initial view of your application
     function getInitialView() as [Views] or [Views, InputDelegates] {
         System.println("---Return App Base View");
-        return [new SequenceAlertsView(), new SequenceAlertsDelegate() ];
+        
+        baseView = new SequenceAlertsView();
+
+        return [ baseView, new SequenceAlertsDelegate() ];
     }
     
     function getApp() as SequenceAlertsApp {
         System.println("---Return Application Base");
+
         return Application.getApp() as SequenceAlertsApp;
     }
     
     // Handle menu button press - needed for API level compatibility
     function onMenu() as Boolean {
         System.println("On Menu when the Menu button is pressed.");
+        
         var menu = new SequenceAlertsSettingsMenu();
         var menuDelegate = new SequenceAlertsMenuDelegate();
+        
         WatchUi.pushView(menu, menuDelegate, WatchUi.SLIDE_UP);
         System.println("---pushing the menu for app base");
         return true;
@@ -68,6 +78,7 @@ class SequenceAlertsApp extends Application.AppBase {
     // Start the timer sequence
     function startSequence() as Boolean {
         System.println("Starting Timer Sequence");
+        
         if (isActive) {
             return false;
         }
@@ -79,10 +90,11 @@ class SequenceAlertsApp extends Application.AppBase {
         secSum = currentSeq[currentIndex] * inSeconds; 
         
         // Update the view to show first countdown
-        baseView.onUpdate(secSum, currentSeq[currentIndex]);
+        baseView.updateCountdown( secSum, currentSeq[currentIndex]);
         
         // Start a timer that ticks every second
         currentTimer.start(method(:timerCallback), 1000, true);
+
         System.println("---timer sequence has started");
         return true;
     }
@@ -101,8 +113,9 @@ class SequenceAlertsApp extends Application.AppBase {
     }
     
     // Timer callback function that runs every second
-    function timerCallback(currentSeq as Array) as Void {
+    function timerCallback() as Void {
         System.println("Callback to timer");
+        
         secSum--;
         
         // Update the view with the new time
@@ -125,8 +138,9 @@ class SequenceAlertsApp extends Application.AppBase {
             
             // Start the next interval
             secSum = currentSeq[currentIndex] * inSeconds; // Convert minutes to seconds
-            System.println("---timercallback complete");
         }
+
+        System.println("---timercallback complete");
     }
     
     // Trigger the alarm with vibration and display alert
