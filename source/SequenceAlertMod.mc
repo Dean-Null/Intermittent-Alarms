@@ -24,9 +24,9 @@ module constVar{
 }
 
 enum sequence {
-    fibonacci,
-    countingUp,
-    countingDown,
-    generic,
-    initial
+    fibonacci = 0,
+    countingUp = 1,
+    countingDown = 2,
+    generic = 3,
+    initial = 4
 }

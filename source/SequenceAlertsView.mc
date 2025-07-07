@@ -11,7 +11,9 @@ class SequenceAlertsView extends WatchUi.View {
     
     function initialize() {
         System.println("Initializing the App Base View");
+
         View.initialize();
+
         System.println("---view has completed initialization");
     }
 
@@ -19,21 +21,14 @@ class SequenceAlertsView extends WatchUi.View {
     function onLayout(dc as Dc) as Void {
         System.println("On Layout method");
         setLayout(Rez.Layouts.StartLayout(dc));
-        
-        _timerLabel = findDrawableById("LabelTimer");
-        _sequenceLabel = findDrawableById("LabelSequence");
-        _statusLabel = findDrawableById("LabelStatus");
 
-        // _timerLabel = findDrawableById(constVar.strLblTimer);
-        // _sequenceLabel = findDrawableById(constVar.strLblSeq);
-        // _statusLabel = findDrawableById(constVar.strLblStatus);
+        _timerLabel = findDrawableById(constVar.strLblTimer);
+        _sequenceLabel = findDrawableById(constVar.strLblSeq);
+        _statusLabel = findDrawableById(constVar.strLblStatus);
         
         // Initialize display
-        _timerLabel.setText("Ready");
-        _statusLabel.setText("Press Start");
-
-        // _timerLabel.setText(constVar.strTxtReady);
-        // _statusLabel.setText(constVar.strTxtStart);
+        _timerLabel.setText(constVar.strTxtReady);
+        _statusLabel.setText(constVar.strTxtStart);
 
         updateSequenceDisplay(Application.getApp().currentSeq);
         System.println("---method completed");
@@ -44,6 +39,7 @@ class SequenceAlertsView extends WatchUi.View {
     // loading resources into memory.
     function onShow() as Void {
         System.println("onShow on view is blank");
+
         System.println("---onshow on view is blank");
     }
 
@@ -53,11 +49,11 @@ class SequenceAlertsView extends WatchUi.View {
 
         // Call the parent onUpdate function to redraw the layout
         View.onUpdate(dc);
-        
+
         System.println("---onupdate onview");
     }
-    // Display the sequence to the user
 
+    // Display the sequence to the user
     // Called when this View is removed from the screen. Save the
     // state of this View here. This includes freeing resources from
     // memory.
@@ -66,17 +62,20 @@ class SequenceAlertsView extends WatchUi.View {
         System.println("---onhide is blank");
     }
 
+    // Updates the the sequence display
     function updateSequenceDisplay(sequence as Array) as Void{
         System.println("Updating Sequence Display");
+
         var seqText = "";
         for (var index = 0; index < sequence.size(); index++) {
-            // Is this really needed?
+            // Is this really needed? Probably not.
             seqText += sequence[index].toString();
             if (index < sequence.size()) {
                 seqText += ", ";
             }   
         }
         _sequenceLabel.setText(seqText);
+
         WatchUi.requestUpdate();
         System.println("---sequence Display updated");
     }
@@ -84,11 +83,12 @@ class SequenceAlertsView extends WatchUi.View {
     // Update the display with the current countdown
     function updateCountdown(seconds as Number, currentMinutes as Number) as Void {
         System.println("Update Countdown");
+
         var minutes = seconds / constVar.minuteInSeconds;
         var secs = seconds % constVar.minuteInSeconds;
-        
         _timerLabel.setText(minutes.format("%d") + ":" + secs.format("%02d"));
         _statusLabel.setText("Current: " + currentMinutes + " min");
+
         WatchUi.requestUpdate();
         System.println("---countdown has been updated");
     }
@@ -96,7 +96,9 @@ class SequenceAlertsView extends WatchUi.View {
     // Show alert when an interval completes
     function showAlert(completedIndex as Number, totalIntervals as Number) as Void {
         System.println("Show an alert for interval");
+
         _statusLabel.setText("INTERVAL " + (completedIndex + 1) + "/" + totalIntervals + " COMPLETE!");
+        
         WatchUi.requestUpdate();
         System.println("---an alert was shown for the interval");
     }
@@ -104,7 +106,9 @@ class SequenceAlertsView extends WatchUi.View {
     // Show info about the next interval
     function showNextInterval(nextMinutes as Number) as Void {
         System.println("Show the next interval");
+
         _statusLabel.setText("Next: " + nextMinutes + " min");
+
         WatchUi.requestUpdate();
         System.println("---next interval has been shown");
     }
@@ -113,11 +117,8 @@ class SequenceAlertsView extends WatchUi.View {
     function showStoppedState() as Void {
         System.println("Show Stopped state");
 
-        _statusLabel.setText("Stop");
-        _statusLabel.setText("Press Start");
-
-        // _timerLabel.setText(constVar.strTxtStop);
-        // _statusLabel.setText(constVar.strTxtStart);
+        _timerLabel.setText(constVar.strTxtStop);
+        _statusLabel.setText(constVar.strTxtStart);
 
         WatchUi.requestUpdate();
         System.println("---stopped state has been shown");
@@ -127,14 +128,10 @@ class SequenceAlertsView extends WatchUi.View {
     function showCompletedState() as Void {
         System.println("show the completed state");
 
-        // _timerLabel.setText(constVar.strTxtDone);
-        // _statusLabel.setText(constVar.strTxtComplete);
-
-        _timerLabel.setText("Done!");
-        _statusLabel.setText("Complete");
+        _timerLabel.setText(constVar.strTxtDone);
+        _statusLabel.setText(constVar.strTxtComplete);
 
         WatchUi.requestUpdate();
         System.println("---complete state hase been shown");
     }
-
 }
