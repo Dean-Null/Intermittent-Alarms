@@ -108,8 +108,13 @@ class SequenceAlertsView extends WatchUi.View {
     // Display stopped state
     function showStoppedState() as Void {
         System.println("Show Stopped state");
-        _timerLabel.setText(constVar.strTxtStop);
-        _statusLabel.setText(constVar.strTxtStart);
+
+        _statusLabel.setText("Stop");
+        _statusLabel.setText("Press Start");
+
+        // _timerLabel.setText(constVar.strTxtStop);
+        // _statusLabel.setText(constVar.strTxtStart);
+
         WatchUi.requestUpdate();
         System.println("---stopped state has been shown");
     }
@@ -117,8 +122,13 @@ class SequenceAlertsView extends WatchUi.View {
     // Display completed state
     function showCompletedState() as Void {
         System.println("show the completed state");
-        _timerLabel.setText(constVar.strTxtDone);
-        _statusLabel.setText(constVar.strTxtComplete);
+
+        // _timerLabel.setText(constVar.strTxtDone);
+        // _statusLabel.setText(constVar.strTxtComplete);
+
+        _timerLabel.setText("Done!");
+        _statusLabel.setText("Complete");
+
         WatchUi.requestUpdate();
         System.println("---complete state hase been shown");
     }
