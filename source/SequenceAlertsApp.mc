@@ -28,7 +28,7 @@ class SequenceAlertsApp extends Application.AppBase {
         System.println("Starting App - setting class fields");
         
         currentIndex = 0;
-        currentSeq = constVar.fibonacci;
+        currentSeq = constVar.generic;
         inSeconds = constVar.minuteInSeconds;
         secSum = 0;
         currentTimer = new Timer.Timer();

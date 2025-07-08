@@ -70,9 +70,12 @@ class SequenceAlertsView extends WatchUi.View {
         for (var index = 0; index < sequence.size(); index++) {
             // Is this really needed? Probably not.
             seqText += sequence[index].toString();
-            if (index < sequence.size()) {
+            if (index >= sequence.size() - 1) {
+                break;
+            }
+            else if (index < sequence.size()) {
                 seqText += ", ";
-            }   
+            }
         }
         _sequenceLabel.setText(seqText);
 

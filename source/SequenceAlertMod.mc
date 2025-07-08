@@ -9,7 +9,7 @@ module constVar{
     const strCup = "countingUp";
     const countingDown as Array = [5, 4, 3, 2, 1];
     const strCdown = "countingDown";
-    const generic as Array = [5, 10, 15, 10, 5 ];
+    const generic as Array = [ 5, 10, 5 ,50 ];
     const strGen = "generic";
 
     const strLblTimer as String = "LabelTimer";

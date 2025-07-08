@@ -29,21 +29,12 @@ class SequenceAlertsDelegate extends WatchUi.InputDelegate {
                 }
                 case WatchUi.KEY_MENU:
                 System.println("Meny key was pressed");
-                return onMenu();
+                return Application.getApp().onMenu();
             default:
                 break;
         }
         
         System.println("---onkey has ended");
         return false;
-    }
-    
-    // Add explicit menu event handler for API compatibility
-    function onMenu() as Boolean {
-        System.println("onMenu start");
-
-        WatchUi.pushView(new Rez.Menus.MainMenu(), new SequenceAlertsMenuDelegate(), WatchUi.SLIDE_UP);
-        System.println("---on menu end");
-        return true;
     }
 }
