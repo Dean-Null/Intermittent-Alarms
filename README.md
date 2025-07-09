@@ -14,13 +14,19 @@ Sequenced Alerts is a watch app meant to aide in segmenting a day into smaller p
 ## Installation
 Open the Garmin Connect application on your mobile device or navigate to garmin using your preferred browser.
 
+### Deploying Watch App app
+1. Run build for Device on Venu2,
+2. Move the PRG to Windows OS,
+3. Move the .prg file into the garmin/app folder,
+4. Disconnect device and allow for the app to be verified.
+
 ### Available for select devices
 * Venu 2
 
 ## Usage
 1. Open the application on one of the supported devices,
 2. Select your mode from the main menu,
-3. Go about your activity, the timer will alert you when you are ready to switch
+3. Go about your activity, the timer will alert you when you are ready to switch.
 
 If you want to stop that is an option from the alert screen.
 

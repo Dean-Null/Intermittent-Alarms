@@ -1,5 +1,7 @@
 import Toybox.Graphics;
 import Toybox.WatchUi;
+import Toybox.System;
+import Toybox.Lang;
 
 // Main View class for the application
 class SequenceAlertsView extends WatchUi.View {
@@ -8,84 +10,131 @@ class SequenceAlertsView extends WatchUi.View {
     private var _statusLabel;
     
     function initialize() {
+        System.println("Initializing the App Base View");
+
         View.initialize();
+
+        System.println("---view has completed initialization");
     }
 
-    // Load resources
-    function onLayout(dc) {
-        setLayout(Rez.Layouts.MainLayout(dc));
-        
-        _timerLabel = findDrawableById("TimerLabel");
-        _sequenceLabel = findDrawableById("SequenceLabel");
-        _statusLabel = findDrawableById("StatusLabel");
+    // Load your resources here
+    function onLayout(dc as Dc) as Void {
+        System.println("On Layout method");
+        setLayout(Rez.Layouts.StartLayout(dc));
+
+        _timerLabel = findDrawableById(constVar.strLblTimer);
+        _sequenceLabel = findDrawableById(constVar.strLblSeq);
+        _statusLabel = findDrawableById(constVar.strLblStatus);
         
         // Initialize display
-        _timerLabel.setText("Ready");
-        _statusLabel.setText("Press Start");
-        var something = Application.getApp()._sequenceNumbers;
-        updateSequenceDisplay(something);
+        _timerLabel.setText(constVar.strTxtReady);
+        _statusLabel.setText(constVar.strTxtStart);
+
+        updateSequenceDisplay(Application.getApp().currentSeq);
+        System.println("---method completed");
     }
 
-    // Update the display with the current countdown
-    function updateCountdown(seconds, currentMinutes) {
-        var minutes = seconds / 60;
-        var secs = seconds % 60;
-        
-        _timerLabel.setText(minutes.format("%d") + ":" + secs.format("%02d"));
-        _statusLabel.setText("Current: " + currentMinutes + " min");
-        WatchUi.requestUpdate();
-    }
-    
-    // Display the sequence to the user
-    function updateSequenceDisplay(sequence) {
-        var seqText = "";
-        for (var i = 0; i < sequence.size(); i++) {
-            seqText += sequence.indexOf(i).toString();
-            if (i < sequence.size() - 1) {
-                seqText += ", ";
-            }
-        }
-        _sequenceLabel.setText(seqText);
-        WatchUi.requestUpdate();
-    }
-    
-    // Show alert when an interval completes
-    function showAlert(completedIndex, totalIntervals) {
-        _statusLabel.setText("INTERVAL " + (completedIndex + 1) + "/" + totalIntervals + " COMPLETE!");
-        WatchUi.requestUpdate();
-    }
-    
-    // Show info about the next interval
-    function showNextInterval(nextMinutes) {
-        _statusLabel.setText("Next: " + nextMinutes + " min");
-        WatchUi.requestUpdate();
-    }
-    
-    // Display stopped state
-    function showStoppedState() {
-        _timerLabel.setText("Stopped");
-        _statusLabel.setText("Press Start");
-        WatchUi.requestUpdate();
-    }
-    
-    // Display completed state
-    function showCompletedState() {
-        _timerLabel.setText("Done!");
-        _statusLabel.setText("Sequence Complete");
-        WatchUi.requestUpdate();
-    }
-    
-    // Called when the view is shown
-    function onShow() {
-    }
+    // Called when this View is brought to the foreground. Restore
+    // the state of this View and prepare it to be shown. This includes
+    // loading resources into memory.
+    function onShow() as Void {
+        System.println("onShow on view is blank");
 
-    // Called when the view is hidden
-    function onHide() {
+        System.println("---onshow on view is blank");
     }
 
     // Update the view
     function onUpdate(dc as Dc) as Void {
+        System.println("onUpdate on view");
+
         // Call the parent onUpdate function to redraw the layout
         View.onUpdate(dc);
+
+        System.println("---onupdate onview");
+    }
+
+    // Display the sequence to the user
+    // Called when this View is removed from the screen. Save the
+    // state of this View here. This includes freeing resources from
+    // memory.
+    function onHide() as Void {
+        System.println("onHide is blank");
+        System.println("---onhide is blank");
+    }
+
+    // Updates the the sequence display
+    function updateSequenceDisplay(sequence as Array) as Void{
+        System.println("Updating Sequence Display");
+
+        var seqText = "";
+        for (var index = 0; index < sequence.size(); index++) {
+            // Is this really needed? Probably not.
+            seqText += sequence[index].toString();
+            if (index >= sequence.size() - 1) {
+                break;
+            }
+            else if (index < sequence.size()) {
+                seqText += ", ";
+            }
+        }
+        _sequenceLabel.setText(seqText);
+
+        WatchUi.requestUpdate();
+        System.println("---sequence Display updated");
+    }
+
+    // Update the display with the current countdown
+    function updateCountdown(seconds as Number, currentMinutes as Number) as Void {
+        System.println("Update Countdown");
+
+        var minutes = seconds / constVar.minuteInSeconds;
+        var secs = seconds % constVar.minuteInSeconds;
+        _timerLabel.setText(minutes.format("%d") + ":" + secs.format("%02d"));
+        _statusLabel.setText("Current: " + currentMinutes + " min");
+
+        WatchUi.requestUpdate();
+        System.println("---countdown has been updated");
+    }
+    
+    // Show alert when an interval completes
+    function showAlert(completedIndex as Number, totalIntervals as Number) as Void {
+        System.println("Show an alert for interval");
+
+        _statusLabel.setText("INTERVAL " + (completedIndex + 1) + "/" + totalIntervals + " COMPLETE!");
+        
+        WatchUi.requestUpdate();
+        System.println("---an alert was shown for the interval");
+    }
+    
+    // Show info about the next interval
+    function showNextInterval(nextMinutes as Number) as Void {
+        System.println("Show the next interval");
+
+        _statusLabel.setText("Next: " + nextMinutes + " min");
+
+        WatchUi.requestUpdate();
+        System.println("---next interval has been shown");
+    }
+    
+    // Display stopped state
+    function showStoppedState() as Void {
+        System.println("Show Stopped state");
+
+        _timerLabel.setText(constVar.strTxtStop);
+        _statusLabel.setText(constVar.strTxtStart);
+
+        WatchUi.requestUpdate();
+        System.println("---stopped state has been shown");
+    }
+    
+    // Display completed state
+    function showCompletedState() as Void {
+        System.println("show the completed state");
+
+        _timerLabel.setText(constVar.strTxtDone);
+        _statusLabel.setText(constVar.strTxtComplete);
+
+        WatchUi.requestUpdate();
+        System.println("---complete state hase been shown");
     }
 }

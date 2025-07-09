@@ -1,129 +1,178 @@
-using Toybox.Application;
-using Toybox.WatchUi;
-using Toybox.Timer;
-using Toybox.System;
-using Toybox.Attention;
+import Toybox.Application;
+import Toybox.Attention;
+import Toybox.Lang;
+import Toybox.System;
+import Toybox.Timer;
+import Toybox.WatchUi;
 
 class SequenceAlertsApp extends Application.AppBase {
-    private var _view;
-    public var _sequenceTimer;
-    public var _sequenceNumbers;
-    private var _currentIndex;
-    public var _isTimerRunning;
-    private var _timeRemaining;
-    private var _delegate;
+    var currentTimer as Timer.Timer?;
+    var isActive as Boolean = false;
+    var currentSeq as Array?;
+    var inSeconds as Number?;
+    var currentIndex as Number?;
+    var secSum as Number?;
+    
+    var baseView;
 
-    private var _minutesInt=10;
-
+    // This is the constructor for the class
     function initialize() {
+        System.println("Initializing App Class");
         AppBase.initialize();
-        // Example Fibonacci sequence in minutes
-        _sequenceNumbers = [1, 2, 3, 5, 8, 13, 21];
-        _currentIndex = 0;
-        _isTimerRunning = false;
-        _sequenceTimer = new Timer.Timer();
+        System.println("---initialization complete");
     }
 
     // onStart() is called on application start up
-    function onStart(state) as Void {
+    function onStart(state as Dictionary?) as Void {
+        // Example Fibonacci sequence in minutes
+        System.println("Starting App - setting class fields");
+        
+        currentIndex = 0;
+        currentSeq = constVar.generic;
+        inSeconds = constVar.minuteInSeconds;
+        secSum = 0;
+        currentTimer = new Timer.Timer();
+
+        System.println("---start complete");
     }
 
     // onStop() is called when your application is exiting
-    function onStop(state) as Void {
-        if (_isTimerRunning) {
-            _sequenceTimer.stop();
+    function onStop(state as Dictionary?) as Void {
+        System.println("Closing App");
+
+        if (isActive) {
+            System.println("Stopping timer");
+            currentTimer.stop();
         }
+
+        System.println("--- closed app");
     }
 
     // Return the initial view of your application
-    function getInitialView() {
-        _view = new SequenceAlertsView();
-        _delegate = new SequenceAlertsInputDelegate();
-        return [_view, _delegate];
+    function getInitialView() as [Views] or [Views, InputDelegates] {
+        System.println("---Return App Base View");
+        
+        baseView = new SequenceAlertsView();
+
+        return [ baseView, new SequenceAlertsDelegate() ];
+    }
+    
+    function getApp() as SequenceAlertsApp {
+        System.println("---Return Application Base");
+
+        return Application.getApp() as SequenceAlertsApp;
     }
     
     // Handle menu button press - needed for API level compatibility
-    function onMenu() {
+    function onMenu() as Boolean {
+        System.println("On Menu when the Menu button is pressed.");
+        
         var menu = new SequenceAlertsSettingsMenu();
         var menuDelegate = new SequenceAlertsMenuDelegate();
+        
         WatchUi.pushView(menu, menuDelegate, WatchUi.SLIDE_UP);
+        System.println("---pushing the menu for app base");
         return true;
     }
     
     // Start the timer sequence
-    function startSequence() {
-        if (_isTimerRunning) {
-            return;
+    function startSequence() as Boolean {
+        System.println("Starting Timer Sequence");
+        
+        if (isActive) {
+            return false;
         }
         
-        _currentIndex = 0;
-        _isTimerRunning = true;
-        var variable = _sequenceNumbers.indexOf(_currentIndex);
-        _timeRemaining = variable * _minutesInt; // Convert minutes to seconds
+        currentIndex = 0;
+        isActive = true;
+
+        // Convert minutes to seconds
+        secSum = currentSeq[currentIndex] * inSeconds; 
         
         // Update the view to show first countdown
-        _view.updateCountdown(_timeRemaining, _sequenceNumbers.indexOf(_currentIndex));
+        baseView.updateCountdown( secSum, currentSeq[currentIndex]);
         
         // Start a timer that ticks every second
-        _sequenceTimer.start(method(:timerCallback), 1000, true);
+        currentTimer.start(method(:timerCallback), 1000, true);
+
+        System.println("---timer sequence has started");
+        return true;
     }
     
     // Stop the timer sequence
-    function stopSequence() {
-        if (_isTimerRunning) {
-            _sequenceTimer.stop();
-            _isTimerRunning = false;
-            _view.showStoppedState();
+    function stopSequence() as Boolean {
+        System.println("Stop timer sequence");
+        if (isActive) {
+            currentTimer.stop();
+            isActive = false;
+            baseView.showStoppedState();
+            return true;
         }
+        System.println("---timer sequence has stopped");
+        return false;
     }
     
     // Timer callback function that runs every second
-    function timerCallback() {
-        _timeRemaining--;
+    function timerCallback() as Void {
+        System.println("Callback to timer");
+        
+        secSum--;
         
         // Update the view with the new time
-        _view.updateCountdown(_timeRemaining, _sequenceNumbers.indexOf(_currentIndex));
+        baseView.updateCountdown(secSum, currentSeq[currentIndex]);
         
         // If the timer reaches zero, trigger the alarm and move to next number in sequence
-        if (_timeRemaining <= 0) {
+        if (secSum <= 0) {
             triggerAlarm();
             
             // Move to the next number in the sequence
-            _currentIndex++;
+            currentIndex++;
             
             // If we've completed the sequence, stop the timer
-            if (_currentIndex >= _sequenceNumbers.size()) {
-                _sequenceTimer.stop();
-                _isTimerRunning = false;
-                _view.showCompletedState();
+            if (currentIndex >= currentSeq.size()) {
+                currentTimer.stop();
+                isActive = false;
+                baseView.showCompletedState();
                 return;
             }
             
             // Start the next interval
-            _timeRemaining = _sequenceNumbers.indexOf(_currentIndex) * _minutesInt; // Convert minutes to seconds
+            secSum = currentSeq[currentIndex] * inSeconds; // Convert minutes to seconds
         }
+
+        System.println("---timercallback complete");
     }
     
     // Trigger the alarm with vibration and display alert
-    function triggerAlarm() {
+    function triggerAlarm() as Void {
+        System.println("Trigger and alarm based on the device");
+        
         if (Attention has :vibrate) {
+            System.println("Vibrate is an option");
             Attention.vibrate([new Attention.VibeProfile(100, 1000)]);
         }
         
         // Show alert on screen
-        _view.showAlert(_currentIndex, _sequenceNumbers.size());
+        baseView.showAlert(currentIndex, currentSeq.size());
         
         // If there's another interval, show what's coming next
-        if (_currentIndex < _sequenceNumbers.size() - 1) {
-            _view.showNextInterval(_sequenceNumbers.indexOf(_currentIndex + 1));
+        if (currentIndex < currentSeq.size() - 1) {
+            System.println("Updating index on current seq");
+            var currentIndexValue = currentSeq[currentIndex];
+            baseView.showNextInterval(currentIndexValue);
         }
+        System.println("---alarm has been triggered");
     }
     
     // Allow user to customize the sequence
-    function setSequence(newSequence) {
-        if (!_isTimerRunning && newSequence != null && newSequence.size() > 0) {
-            _sequenceNumbers = newSequence;
-            _view.updateSequenceDisplay(_sequenceNumbers);
+    function setSequence(newSequence as Array) as Void {
+        System.println("Set Sequence for the next alarms");
+        
+        if (!isActive && newSequence != null && newSequence.size() > 0) {
+            currentSeq = newSequence;
+            baseView.updateSequenceDisplay(currentSeq);
         }
+
+        System.println("---sequence has been set");
     }
 }

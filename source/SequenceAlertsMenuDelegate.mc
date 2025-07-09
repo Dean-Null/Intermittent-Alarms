@@ -1,31 +1,34 @@
-using Toybox.Application;
-using Toybox.WatchUi;
-using Toybox.Timer;
-using Toybox.System;
-using Toybox.Attention;
+import Toybox.Lang;
+import Toybox.System;
+import Toybox.WatchUi;
 
 // Menu input delegate
 class SequenceAlertsMenuDelegate extends WatchUi.Menu2InputDelegate {
     function initialize() {
+        System.println("Intializing Menu Delegate");
         Menu2InputDelegate.initialize();
+        System.println("---menu delegate initialized");
     }
-    
-    function onSelect(item) {
-        var id = item.getId();
-        
-        if (id == "fibonacci") {
-            Application.getApp().setSequence([1, 2, 3, 5, 8, 13]);
-        } else if (id == "countingUp") {
-            Application.getApp().setSequence([1, 2, 3, 4, 5]);
-        } else if (id == "countingDown") {
-            Application.getApp().setSequence([5, 4, 3, 2, 1]);
-        } else if (id == "custom") {
-            // Here you would implement logic to accept custom sequence input
-            // This is more complex and would require additional UI
+
+    function setArray(id) as Void {
+        System.println("Set Sequence Array");
+
+        switch (id) {
+            case constVar.strFib:
+                Application.getApp().setSequence(constVar.fibonacci);
+                break;
+            case constVar.strCup:
+                Application.getApp().setSequence(constVar.countingUp);
+                break;
+            case constVar.strCdown:
+                Application.getApp().setSequence(constVar.countingDown);
+                break;
+            case constVar.strGen:
+                Application.getApp().setSequence(constVar.generic);
+                break;
         }
-        
+
         WatchUi.popView(WatchUi.SLIDE_RIGHT);
-        // v Had an error because no return is expected
-        //return true;
+        System.println("---sequence array has been set");
     }
 }
