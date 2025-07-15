@@ -41,3 +41,4 @@ developer_key
 **/internal-mir
 **/mir
 *.prg
+**/.vscode
