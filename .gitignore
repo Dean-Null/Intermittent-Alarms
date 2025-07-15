@@ -36,9 +36,10 @@
 developer_key
 .DS_Store
 
-**/bin
-**/gen
-**/internal-mir
 **/mir
 *.prg
 **/.vscode
+**/bin
+**/deviceBuilds
+**/internal-mir
+**/gen
