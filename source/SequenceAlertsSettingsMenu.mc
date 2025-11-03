@@ -7,6 +7,7 @@ import Toybox.Attention;
 // Settings menu for customizing the sequence
 class SequenceAlertsSettingsMenu extends WatchUi.Menu2 {
     function initialize() {
+        
         System.println("Initializing Settings Menu2");
         Menu2.initialize({:title=>"Settings"});
         Menu2.setTitle("Settings");

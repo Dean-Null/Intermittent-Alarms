@@ -8,6 +8,7 @@ class SequenceAlertsView extends WatchUi.View {
     private var _timerLabel;
     private var _sequenceLabel;
     private var _statusLabel;
+    private var _centerImage;
     
     function initialize() {
         System.println("Initializing the App Base View");
@@ -22,11 +23,13 @@ class SequenceAlertsView extends WatchUi.View {
         System.println("On Layout method");
         setLayout(Rez.Layouts.StartLayout(dc));
 
+        _centerImage = findDrawableById(constVar.strImgCenter);
         _timerLabel = findDrawableById(constVar.strLblTimer);
         _sequenceLabel = findDrawableById(constVar.strLblSeq);
         _statusLabel = findDrawableById(constVar.strLblStatus);
         
         // Initialize display
+        //_centerImage.setBitmap("IconBizarre");
         _timerLabel.setText(constVar.strTxtReady);
         _statusLabel.setText(constVar.strTxtStart);
 

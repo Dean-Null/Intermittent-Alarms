@@ -6,7 +6,9 @@ import Toybox.WatchUi;
 class SequenceAlertsMenuDelegate extends WatchUi.Menu2InputDelegate {
     function initialize() {
         System.println("Intializing Menu Delegate");
+
         Menu2InputDelegate.initialize();
+
         System.println("---menu delegate initialized");
     }
 
@@ -17,17 +19,20 @@ class SequenceAlertsMenuDelegate extends WatchUi.Menu2InputDelegate {
             case constVar.strFib:
                 Application.getApp().setSequence(constVar.fibonacci);
                 break;
+
             case constVar.strCup:
                 Application.getApp().setSequence(constVar.countingUp);
                 break;
+
             case constVar.strCdown:
                 Application.getApp().setSequence(constVar.countingDown);
                 break;
+
             case constVar.strGen:
                 Application.getApp().setSequence(constVar.generic);
                 break;
         }
-
+        
         WatchUi.popView(WatchUi.SLIDE_RIGHT);
         System.println("---sequence array has been set");
     }

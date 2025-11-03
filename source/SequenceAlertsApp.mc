@@ -18,7 +18,9 @@ class SequenceAlertsApp extends Application.AppBase {
     // This is the constructor for the class
     function initialize() {
         System.println("Initializing App Class");
+
         AppBase.initialize();
+        
         System.println("---initialization complete");
     }
 
