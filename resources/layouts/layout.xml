@@ -1,8 +1,9 @@
 <layout id="StartLayout" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://developer.garmin.com/downloads/connect-iq/resources.xsd">
     <bitmap 
         id="ImageCenter" 
-        x="center" y="50" 
-        filename="../drawables/garmin_watch_small_icon.png" 
+        x="center" y="25"
+        scaleX="128" scaleY="128"
+        filename="../drawables/activityIconWorking.png" 
     />
     <label
         id="LabelActivity" 

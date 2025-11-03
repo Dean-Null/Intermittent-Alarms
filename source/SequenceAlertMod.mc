@@ -12,6 +12,7 @@ module constVar{
     const generic as Array = [ 5, 10, 5 ,50 ];
     const strGen = "generic";
 
+    const strImgCenter as String = "ImageCenter";
     const strLblTimer as String = "LabelTimer";
     const strLblSeq as String = "LabelSequence";
     const strLblStatus as String = "LabelStatus";
