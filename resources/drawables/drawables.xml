@@ -1,3 +1,17 @@
 <drawables xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://developer.garmin.com/downloads/connect-iq/resources.xsd">
     <bitmap id="LauncherIcon" filename="garmin_watch_small_icon.png" dithering="none" />
+    <bitmap id="ActivityIconBizarre" filename="activityIconBizarre.png" />
+    <bitmap id="ActivityIconCleaning" filename="activityIconCleaning.png" />
+    <bitmap id="ActivityIconDancing" filename="activityIconDancing.png" />
+    <bitmap id="ActivityIconEating" filename="activityIconEating.png" />
+    <bitmap id="ActivityIconJournaling" filename="activityIconJournaling.png" />
+    <bitmap id="ActivityIconListening" filename="activityIconListening.png" />
+    <bitmap id="ActivityIconPlanning" filename="activityIconPlanning.png" />
+    <bitmap id="ActivityIconReading" filename="activityIconReading.png" />
+    <bitmap id="ActivityIconRecreation" filename="activityIconRecreation.png" />
+    <bitmap id="ActivityIconSleeping" filename="activityIconSleeping.png" />
+    <bitmap id="ActivityIconSorry" filename="activityIconSorry.png" />
+    <bitmap id="ActivityIconThinking" filename="activityIconThinking.png" />
+    <bitmap id="ActivityIconWalking" filename="activityIconWalking.png" />
+    <bitmap id="ActivityIconWorking" filename="activityIconWorking.png" />
 </drawables>

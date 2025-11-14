@@ -1,7 +1,7 @@
 import Toybox.Lang;
 
 module constVar{
-    const minuteInSeconds as Number = 60;
+    const minuteInSeconds as Number = 2;
     
     const fibonacci as Array = [1, 2, 3, 5, 8, 13];
     const strFib = "fibonacci";

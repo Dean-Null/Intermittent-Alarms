@@ -29,7 +29,6 @@ class SequenceAlertsView extends WatchUi.View {
         _statusLabel = findDrawableById(constVar.strLblStatus);
         
         // Initialize display
-        //_centerImage.setBitmap("IconBizarre");
         _timerLabel.setText(constVar.strTxtReady);
         _statusLabel.setText(constVar.strTxtStart);
 
@@ -48,12 +47,12 @@ class SequenceAlertsView extends WatchUi.View {
 
     // Update the view
     function onUpdate(dc as Dc) as Void {
-        System.println("onUpdate on view");
+        System.println("onUpdate on View");
 
         // Call the parent onUpdate function to redraw the layout
         View.onUpdate(dc);
 
-        System.println("---onupdate onview");
+        System.println("---onUpdate on View");
     }
 
     // Display the sequence to the user
@@ -63,6 +62,31 @@ class SequenceAlertsView extends WatchUi.View {
     function onHide() as Void {
         System.println("onHide is blank");
         System.println("---onhide is blank");
+    }
+
+    // Maps interval index to icon resource ID
+    private function getIconResourceId(index as Number) as ResourceId {
+        // Array of all available activity icon resources
+        var icons = [
+            Rez.Drawables.ActivityIconBizarre,
+            Rez.Drawables.ActivityIconCleaning,
+            Rez.Drawables.ActivityIconDancing,
+            Rez.Drawables.ActivityIconEating,
+            Rez.Drawables.ActivityIconJournaling,
+            Rez.Drawables.ActivityIconListening,
+            Rez.Drawables.ActivityIconPlanning,
+            Rez.Drawables.ActivityIconReading,
+            Rez.Drawables.ActivityIconRecreation,
+            Rez.Drawables.ActivityIconSleeping,
+            Rez.Drawables.ActivityIconSorry,
+            Rez.Drawables.ActivityIconThinking,
+            Rez.Drawables.ActivityIconWalking,
+            Rez.Drawables.ActivityIconWorking
+        ];
+        
+        // Cycle through icons using modulo
+        var iconIndex = index % icons.size();
+        return icons[iconIndex];
     }
 
     // Updates the the sequence display
@@ -82,6 +106,17 @@ class SequenceAlertsView extends WatchUi.View {
         }
         _sequenceLabel.setText(seqText);
 
+        // Set the icon based on the current interval index
+        var app = Application.getApp() as SequenceAlertsApp;
+        var currentIndex = 0;
+        if (app.currentIndex != null) {
+            currentIndex = app.currentIndex;
+        }
+        
+        if (_centerImage != null) {
+            _centerImage.setBitmap(getIconResourceId(currentIndex));
+        }
+
         WatchUi.requestUpdate();
         System.println("---sequence Display updated");
     }
@@ -95,6 +130,12 @@ class SequenceAlertsView extends WatchUi.View {
         _timerLabel.setText(minutes.format("%d") + ":" + secs.format("%02d"));
         _statusLabel.setText("Current: " + currentMinutes + " min");
 
+        // Update icon to match current interval index
+        var app = Application.getApp() as SequenceAlertsApp;
+        if (_centerImage != null && app.currentIndex != null) {
+            _centerImage.setBitmap(getIconResourceId(app.currentIndex));
+        }
+
         WatchUi.requestUpdate();
         System.println("---countdown has been updated");
     }
@@ -105,6 +146,11 @@ class SequenceAlertsView extends WatchUi.View {
 
         _statusLabel.setText("INTERVAL " + (completedIndex + 1) + "/" + totalIntervals + " COMPLETE!");
         
+        // Update icon to match the completed interval index
+        if (_centerImage != null) {
+            _centerImage.setBitmap(getIconResourceId(completedIndex));
+        }
+        
         WatchUi.requestUpdate();
         System.println("---an alert was shown for the interval");
     }
@@ -114,6 +160,13 @@ class SequenceAlertsView extends WatchUi.View {
         System.println("Show the next interval");
 
         _statusLabel.setText("Next: " + nextMinutes + " min");
+
+        // Update icon to match the next interval index (currentIndex + 1)
+        var app = Application.getApp() as SequenceAlertsApp;
+        if (_centerImage != null && app.currentIndex != null) {
+            var nextIndex = app.currentIndex + 1;
+            _centerImage.setBitmap(getIconResourceId(nextIndex));
+        }
 
         WatchUi.requestUpdate();
         System.println("---next interval has been shown");
@@ -138,6 +191,6 @@ class SequenceAlertsView extends WatchUi.View {
         _statusLabel.setText(constVar.strTxtComplete);
 
         WatchUi.requestUpdate();
-        System.println("---complete state hase been shown");
+        System.println("---complete state has been shown");
     }
 }
