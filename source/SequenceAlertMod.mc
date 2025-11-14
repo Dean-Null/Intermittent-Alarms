@@ -16,12 +16,15 @@ module constVar{
     const strLblTimer as String = "LabelTimer";
     const strLblSeq as String = "LabelSequence";
     const strLblStatus as String = "LabelStatus";
+    const strLblLoop as String = "LabelLoop";
 
     const strTxtReady as String = "Ready";
     const strTxtStart as String = "Press Start";
     const strTxtStop as String = "Stopped";
     const strTxtDone as String = "Done!";
     const strTxtComplete as String = "Sequence Complete";
+    const strLoopActive as String = "∞";
+    const strLoopInactive as String = "✘";
 }
 
 enum sequence {

@@ -5,7 +5,7 @@ import Toybox.WatchUi;
 // Menu input delegate
 class SequenceAlertsMenuDelegate extends WatchUi.Menu2InputDelegate {
     function initialize() {
-        System.println("Intializing Menu Delegate");
+        System.println("Initializing Menu Delegate");
 
         Menu2InputDelegate.initialize();
 

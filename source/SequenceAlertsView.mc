@@ -9,6 +9,9 @@ class SequenceAlertsView extends WatchUi.View {
     private var _sequenceLabel;
     private var _statusLabel;
     private var _centerImage;
+    private var _loopLabel;
+    private var _loopLabelY as Number = 230;
+    private var _loopLabelHeight as Number = 30; // Approximate height for touch detection
     
     function initialize() {
         System.println("Initializing the App Base View");
@@ -27,12 +30,18 @@ class SequenceAlertsView extends WatchUi.View {
         _timerLabel = findDrawableById(constVar.strLblTimer);
         _sequenceLabel = findDrawableById(constVar.strLblSeq);
         _statusLabel = findDrawableById(constVar.strLblStatus);
+        _loopLabel = findDrawableById(constVar.strLblLoop);
+        
+        // Store loop label position for touch detection
+        _loopLabelY = 230; // Matches layout.xml y position
         
         // Initialize display
         _timerLabel.setText(constVar.strTxtReady);
         _statusLabel.setText(constVar.strTxtStart);
+        _loopLabel.setText(constVar.strLoopInactive);
 
         updateSequenceDisplay(Application.getApp().currentSeq);
+        updateLoopIndicator();
         System.println("---method completed");
     }
 
@@ -192,5 +201,35 @@ class SequenceAlertsView extends WatchUi.View {
 
         WatchUi.requestUpdate();
         System.println("---complete state has been shown");
+    }
+    
+    // Update loop indicator display
+    function updateLoopIndicator() as Void {
+        System.println("Update loop indicator");
+        
+        if (_loopLabel != null) {
+            var app = Application.getApp() as SequenceAlertsApp;
+            if (app.isLoopEnabled) {
+                _loopLabel.setText(constVar.strLoopActive);
+            } else {
+                _loopLabel.setText(constVar.strLoopInactive);
+            }
+            WatchUi.requestUpdate();
+        }
+        
+        System.println("---loop indicator updated");
+    }
+    
+    // Get loop label bounds for touch detection
+    function getLoopLabelBounds() as Dictionary {
+        var screenWidth = System.getDeviceSettings().screenWidth;
+        var touchableWidth = 60; // Wider touch area for easier tapping
+        
+        return {
+            :x => (screenWidth / 2) - (touchableWidth / 2), // Centered touchable area
+            :y => _loopLabelY - 5, // Extend slightly above and below
+            :width => touchableWidth,
+            :height => _loopLabelHeight + 10
+        };
     }
 }

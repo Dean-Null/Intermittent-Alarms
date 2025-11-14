@@ -118,4 +118,33 @@ class SequenceAlertsDelegate extends WatchUi.InputDelegate {
         System.println("---onkey has ended");
         return false;
     }
+    
+    // Handle touch events
+    function onTap(evt as WatchUi.ClickEvent) as Boolean {
+        System.println("Touch event detected");
+        
+        var app = Application.getApp() as SequenceAlertsApp;
+        var view = app.baseView;
+        
+        if (view != null && view has :getLoopLabelBounds) {
+            var bounds = view.getLoopLabelBounds();
+            var coords = evt.getCoordinates();
+            var x = coords[0];
+            var y = coords[1];
+            
+            // Check if tap is within loop label bounds
+            if (x >= bounds.get(:x) && 
+                x <= bounds.get(:x) + bounds.get(:width) &&
+                y >= bounds.get(:y) && 
+                y <= bounds.get(:y) + bounds.get(:height)) {
+                
+                System.println("Loop label tapped - toggling loop");
+                app.toggleLoop();
+                return true;
+            }
+        }
+        
+        System.println("---touch event not handled");
+        return false;
+    }
 }

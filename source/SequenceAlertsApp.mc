@@ -8,6 +8,7 @@ import Toybox.WatchUi;
 class SequenceAlertsApp extends Application.AppBase {
     var currentTimer as Timer.Timer?;
     var isActive as Boolean = false;
+    var isLoopEnabled as Boolean = false;
     var currentSeq as Array?;
     var inSeconds as Number?;
     var currentIndex as Number?;
@@ -130,12 +131,21 @@ class SequenceAlertsApp extends Application.AppBase {
             // Move to the next number in the sequence
             currentIndex++;
             
-            // If we've completed the sequence, stop the timer
+            // If we've completed the sequence, check if loop is enabled
             if (currentIndex >= currentSeq.size()) {
-                currentTimer.stop();
-                isActive = false;
-                baseView.showCompletedState();
-                return;
+                // If loop is enabled, restart the sequence
+                if (isLoopEnabled) {
+                    currentIndex = 0;
+                    secSum = currentSeq[currentIndex] * inSeconds;
+                    baseView.updateCountdown(secSum, currentSeq[currentIndex]);
+                    return;
+                } else {
+                    // Otherwise, stop the timer
+                    currentTimer.stop();
+                    isActive = false;
+                    baseView.showCompletedState();
+                    return;
+                }
             }
             
             // Start the next interval
@@ -176,5 +186,15 @@ class SequenceAlertsApp extends Application.AppBase {
         }
 
         System.println("---sequence has been set");
+    }
+    
+    // Toggle loop state
+    function toggleLoop() as Void {
+        System.println("Toggle loop state");
+        
+        isLoopEnabled = !isLoopEnabled;
+        baseView.updateLoopIndicator();
+        
+        System.println("---loop state toggled: " + isLoopEnabled);
     }
 }

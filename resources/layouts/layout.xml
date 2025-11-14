@@ -19,6 +19,13 @@
         color="Graphics.COLOR_LT_GRAY" 
         justification="Graphics.TEXT_JUSTIFY_CENTER" 
     />
+    <label
+        id="LabelLoop" 
+        x="center" y="230" 
+        font="Graphics.FONT_SMALL" 
+        color="Graphics.COLOR_LT_GRAY" 
+        justification="Graphics.TEXT_JUSTIFY_CENTER" 
+    />
     <label 
         id="LabelStatus" 
         x="center" y="260" 
