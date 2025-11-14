@@ -12,6 +12,15 @@ class SequenceAlertsMenuDelegate extends WatchUi.Menu2InputDelegate {
         System.println("---menu delegate initialized");
     }
 
+    function onSelect(item as WatchUi.MenuItem) as Void {
+        System.println("Menu item selected");
+
+        var id = item.getId();
+        setArray(id);
+
+        System.println("---menu item selection handled");
+    }
+
     function setArray(id) as Void {
         System.println("Set Sequence Array");
 

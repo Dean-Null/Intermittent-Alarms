@@ -19,56 +19,18 @@ class SequenceAlertsDelegate extends WatchUi.InputDelegate {
         switch (keyEvent.getKey()) {
             case WatchUi.KEY_CLOCK:
                 System.println("WatchUi.KEY_CLOCK");
+                break;
 
             case WatchUi.KEY_DOWN:
                 System.println("WatchUi.KEY_DOWN");
+                break;
 
             case WatchUi.KEY_DOWN_LEFT:
                 System.println("WatchUi.KEY_DOWN_LEFT");
+                break;
 
             case WatchUi.KEY_ENTER:
                 System.println("WatchUi.KEY_ENTER");
-
-            case WatchUi.KEY_ESC:
-                System.println("WatchUi.KEY_ESC");
-
-            case WatchUi.KEY_FIND:
-                System.println("WatchUi.KEY_FIND");
-
-            case WatchUi.KEY_LAP:
-                System.println("WatchUi.KEY_LAP");
-
-            case WatchUi.KEY_LEFT:
-                System.println("WatchUi.KEY_LEFT");
-            
-            case WatchUi.KEY_LIGHT:
-                System.println("WatchUi.KEY_LIGHT");
-
-            case WatchUi.KEY_MENU:
-                System.println("WatchUi.KEY_MENU");
-                return Application.getApp().onMenu();
-
-            case WatchUi.KEY_MODE:
-                System.println("WatchUi.KEY_MODE");
-
-            case WatchUi.KEY_PAGE:
-                System.println("WatchUi.KEY_PAGE");
-
-            case WatchUi.KEY_POWER:
-                System.println("WatchUi.KEY_POWER");
-
-            case WatchUi.KEY_RESET:
-                System.println("WatchUi.KEY_RESET");
-
-            case WatchUi.KEY_RIGHT:
-                System.println("WatchUi.KEY_RIGHT");
-
-            case WatchUi.KEY_SPORT:
-                System.println("WatchUi.KEY_SPORT");
-            
-            case WatchUi.KEY_START:
-                System.println("WatchUi.KEY_START");
-                System.println("Start or Enter key was pressed");
                 if (!Application.getApp().isActive) {
                     System.println("Is active start sequence");
                     return Application.getApp().startSequence();
@@ -77,20 +39,77 @@ class SequenceAlertsDelegate extends WatchUi.InputDelegate {
                     return Application.getApp().stopSequence();
                 }
 
+            case WatchUi.KEY_ESC:
+                System.println("WatchUi.KEY_ESC");
+                break;
+
+            case WatchUi.KEY_FIND:
+                System.println("WatchUi.KEY_FIND");
+                break;
+
+            case WatchUi.KEY_LAP:
+                System.println("WatchUi.KEY_LAP");
+                break;
+
+            case WatchUi.KEY_LEFT:
+                System.println("WatchUi.KEY_LEFT");
+                break;
+            
+            case WatchUi.KEY_LIGHT:
+                System.println("WatchUi.KEY_LIGHT");
+                break;
+
+            case WatchUi.KEY_MENU:
+                System.println("WatchUi.KEY_MENU");
+                return Application.getApp().onMenu();
+
+            case WatchUi.KEY_MODE:
+                System.println("WatchUi.KEY_MODE");
+                break;
+
+            case WatchUi.KEY_PAGE:
+                System.println("WatchUi.KEY_PAGE");
+                break;
+
+            case WatchUi.KEY_POWER:
+                System.println("WatchUi.KEY_POWER");
+                break;
+
+            case WatchUi.KEY_RESET:
+                System.println("WatchUi.KEY_RESET");
+                break;
+
+            case WatchUi.KEY_RIGHT:
+                System.println("WatchUi.KEY_RIGHT");
+                break;
+
+            case WatchUi.KEY_SPORT:
+                System.println("WatchUi.KEY_SPORT");
+                break;
+            
+            case WatchUi.KEY_START:
+                System.println("WatchUi.KEY_START");
+                break;
+
             case WatchUi.KEY_UP:
                 System.println("WatchUi.KEY_UP");
+                break;
 
             case WatchUi.KEY_UP_LEFT:
                 System.println("WatchUi.KEY_UP_LEFT");
+                break;
 
             case WatchUi.KEY_UP_RIGHT:
                 System.println("WatchUi.KEY_UP_RIGHT");
+                break;
 
             case WatchUi.KEY_ZIN:
                 System.println("WatchUi.KEY_ZIN");
+                break;
             
             case WatchUi.KEY_ZOUT:
                 System.println("WatchUi.KEY_ZOUT");
+                break;
             
             default:
                 break;
