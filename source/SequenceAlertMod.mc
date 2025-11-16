@@ -15,7 +15,6 @@ module constVar{
     const strImgCenter as String = "ImageCenter";
     const strLblTimer as String = "LabelTimer";
     const strLblSeq as String = "LabelSequence";
-    const strLblStatus as String = "LabelStatus";
     const strLblLoop as String = "LabelLoop";
 
     const strTxtReady as String = "Ready";
@@ -23,8 +22,6 @@ module constVar{
     const strTxtStop as String = "Stopped";
     const strTxtDone as String = "Done!";
     const strTxtComplete as String = "Sequence Complete";
-    const strLoopActive as String = "∞";
-    const strLoopInactive as String = "✘";
 }
 
 enum sequence {

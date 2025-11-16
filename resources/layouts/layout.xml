@@ -2,7 +2,6 @@
     <bitmap 
         id="ImageCenter" 
         x="center" y="25"
-        scaleX="128" scaleY="128"
         filename="../drawables/activityIconWorking.png" 
     />
     <label
@@ -19,19 +18,11 @@
         color="Graphics.COLOR_LT_GRAY" 
         justification="Graphics.TEXT_JUSTIFY_CENTER" 
     />
-    <label
+    <bitmap
         id="LabelLoop" 
         x="center" y="230" 
-        font="Graphics.FONT_SMALL" 
-        color="Graphics.COLOR_LT_GRAY" 
-        justification="Graphics.TEXT_JUSTIFY_CENTER" 
-    />
-    <label 
-        id="LabelStatus" 
-        x="center" y="260" 
-        font="Graphics.FONT_SMALL" 
-        color="Graphics.COLOR_YELLOW" 
-        justification="Graphics.TEXT_JUSTIFY_CENTER" 
+        scaleX="64" scaleY="64"
+        filename="../drawables/loopInactive.png" 
     />
     <label 
         id="LabelTimer" 

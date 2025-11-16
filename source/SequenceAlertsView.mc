@@ -7,7 +7,6 @@ import Toybox.Lang;
 class SequenceAlertsView extends WatchUi.View {
     private var _timerLabel;
     private var _sequenceLabel;
-    private var _statusLabel;
     private var _centerImage;
     private var _loopLabel;
     private var _loopLabelY as Number = 230;
@@ -29,16 +28,14 @@ class SequenceAlertsView extends WatchUi.View {
         _centerImage = findDrawableById(constVar.strImgCenter);
         _timerLabel = findDrawableById(constVar.strLblTimer);
         _sequenceLabel = findDrawableById(constVar.strLblSeq);
-        _statusLabel = findDrawableById(constVar.strLblStatus);
         _loopLabel = findDrawableById(constVar.strLblLoop);
         
-        // Store loop label position for touch detection
-        _loopLabelY = 230; // Matches layout.xml y position
+        // // Store loop label position for touch detection
+        // _loopLabelY = 230; // Matches layout.xml y position
         
         // Initialize display
         _timerLabel.setText(constVar.strTxtReady);
-        _statusLabel.setText(constVar.strTxtStart);
-        _loopLabel.setText(constVar.strLoopInactive);
+        _loopLabel.setBitmap(Rez.Drawables.LoopInactive);
 
         updateSequenceDisplay(Application.getApp().currentSeq);
         updateLoopIndicator();
@@ -137,7 +134,6 @@ class SequenceAlertsView extends WatchUi.View {
         var minutes = seconds / constVar.minuteInSeconds;
         var secs = seconds % constVar.minuteInSeconds;
         _timerLabel.setText(minutes.format("%d") + ":" + secs.format("%02d"));
-        _statusLabel.setText("Current: " + currentMinutes + " min");
 
         // Update icon to match current interval index
         var app = Application.getApp() as SequenceAlertsApp;
@@ -152,8 +148,6 @@ class SequenceAlertsView extends WatchUi.View {
     // Show alert when an interval completes
     function showAlert(completedIndex as Number, totalIntervals as Number) as Void {
         System.println("Show an alert for interval");
-
-        _statusLabel.setText("INTERVAL " + (completedIndex + 1) + "/" + totalIntervals + " COMPLETE!");
         
         // Update icon to match the completed interval index
         if (_centerImage != null) {
@@ -167,8 +161,6 @@ class SequenceAlertsView extends WatchUi.View {
     // Show info about the next interval
     function showNextInterval(nextMinutes as Number) as Void {
         System.println("Show the next interval");
-
-        _statusLabel.setText("Next: " + nextMinutes + " min");
 
         // Update icon to match the next interval index (currentIndex + 1)
         var app = Application.getApp() as SequenceAlertsApp;
@@ -186,7 +178,6 @@ class SequenceAlertsView extends WatchUi.View {
         System.println("Show Stopped state");
 
         _timerLabel.setText(constVar.strTxtStop);
-        _statusLabel.setText(constVar.strTxtStart);
 
         WatchUi.requestUpdate();
         System.println("---stopped state has been shown");
@@ -197,7 +188,6 @@ class SequenceAlertsView extends WatchUi.View {
         System.println("show the completed state");
 
         _timerLabel.setText(constVar.strTxtDone);
-        _statusLabel.setText(constVar.strTxtComplete);
 
         WatchUi.requestUpdate();
         System.println("---complete state has been shown");
@@ -210,9 +200,9 @@ class SequenceAlertsView extends WatchUi.View {
         if (_loopLabel != null) {
             var app = Application.getApp() as SequenceAlertsApp;
             if (app.isLoopEnabled) {
-                _loopLabel.setText(constVar.strLoopActive);
+                _loopLabel.setBitmap(Rez.Drawables.LoopActive);
             } else {
-                _loopLabel.setText(constVar.strLoopInactive);
+                _loopLabel.setBitmap(Rez.Drawables.LoopInactive);
             }
             WatchUi.requestUpdate();
         }
