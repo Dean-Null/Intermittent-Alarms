@@ -14,4 +14,6 @@
     <bitmap id="ActivityIconThinking" filename="activityIconThinking.png" />
     <bitmap id="ActivityIconWalking" filename="activityIconWalking.png" />
     <bitmap id="ActivityIconWorking" filename="activityIconWorking.png" />
+    <bitmap id="LoopActive" filename="loopActive.png" />
+    <bitmap id="LoopInactive" filename="loopInactive.png" />
 </drawables>
