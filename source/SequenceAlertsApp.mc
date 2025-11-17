@@ -32,7 +32,7 @@ class SequenceAlertsApp extends Application.AppBase {
         
         currentIndex = 0;
         currentSeq = constVar.generic;
-        inSeconds = constVar.minuteInSeconds;
+        inSeconds = constVar.secondsInMinutes;
         secSum = 0;
         currentTimer = new Timer.Timer();
 

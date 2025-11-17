@@ -1,16 +1,16 @@
 import Toybox.Lang;
 
 module constVar{
-    const minuteInSeconds as Number = 2;
+    const secondsInMinutes as Number = 60;
     
     const fibonacci as Array = [1, 2, 3, 5, 8, 13];
     const strFib = "fibonacci";
     const countingUp as Array = [1, 2, 3, 4, 5];
-    const strCup = "countingUp";
+    const strCountUp = "countingUp";
     const countingDown as Array = [5, 4, 3, 2, 1];
-    const strCdown = "countingDown";
+    const strCountDown = "countingDown";
     const generic as Array = [ 5, 10, 5 ,50 ];
-    const strGen = "generic";
+    const strGeneric = "generic";
 
     const strImgCenter as String = "ImageCenter";
     const strLblTimer as String = "LabelTimer";

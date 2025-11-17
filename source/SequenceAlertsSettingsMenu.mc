@@ -14,9 +14,9 @@ class SequenceAlertsSettingsMenu extends WatchUi.Menu2 {
         
         // Add menu items for predefined sequences
         addItem(new WatchUi.MenuItem("Fibonacci", null, constVar.strFib, null));
-        addItem(new WatchUi.MenuItem("Counting Up", null, constVar.strCup, null));
-        addItem(new WatchUi.MenuItem("Counting Down", null, constVar.strCdown, null));
-        addItem(new WatchUi.MenuItem("Generic", null, constVar.strGen, null));
+        addItem(new WatchUi.MenuItem("Counting Up", null, constVar.strCountUp, null));
+        addItem(new WatchUi.MenuItem("Counting Down", null, constVar.strCountDown, null));
+        addItem(new WatchUi.MenuItem("Generic", null, constVar.strGeneric, null));
         System.println("---settings menu2 initialized");
     }
 }

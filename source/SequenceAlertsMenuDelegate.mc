@@ -29,15 +29,15 @@ class SequenceAlertsMenuDelegate extends WatchUi.Menu2InputDelegate {
                 Application.getApp().setSequence(constVar.fibonacci);
                 break;
 
-            case constVar.strCup:
+            case constVar.strCountUp:
                 Application.getApp().setSequence(constVar.countingUp);
                 break;
 
-            case constVar.strCdown:
+            case constVar.strCountDown:
                 Application.getApp().setSequence(constVar.countingDown);
                 break;
 
-            case constVar.strGen:
+            case constVar.strGeneric:
                 Application.getApp().setSequence(constVar.generic);
                 break;
         }

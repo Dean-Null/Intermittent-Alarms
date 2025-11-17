@@ -131,8 +131,8 @@ class SequenceAlertsView extends WatchUi.View {
     function updateCountdown(seconds as Number, currentMinutes as Number) as Void {
         System.println("Update Countdown");
 
-        var minutes = seconds / constVar.minuteInSeconds;
-        var secs = seconds % constVar.minuteInSeconds;
+        var minutes = seconds / constVar.secondsInMinutes;
+        var secs = seconds % constVar.secondsInMinutes;
         _timerLabel.setText(minutes.format("%d") + ":" + secs.format("%02d"));
 
         // Update icon to match current interval index
