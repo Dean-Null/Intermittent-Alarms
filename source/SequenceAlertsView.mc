@@ -10,7 +10,7 @@ class SequenceAlertsView extends WatchUi.View {
     private var _centerImage;
     private var _loopLabel;
     private var _loopLabelY as Number = 230;
-    private var _loopLabelHeight as Number = 30; // Approximate height for touch detection
+    private var _loopLabelHeight as Number = 30; 
     
     function initialize() {
         System.println("Initializing the App Base View");
@@ -28,10 +28,7 @@ class SequenceAlertsView extends WatchUi.View {
         _centerImage = findDrawableById(constVar.strImgCenter);
         _timerLabel = findDrawableById(constVar.strLblTimer);
         _sequenceLabel = findDrawableById(constVar.strLblSeq);
-        _loopLabel = findDrawableById(constVar.strLblLoop);
-        
-        // // Store loop label position for touch detection
-        // _loopLabelY = 230; // Matches layout.xml y position
+        _loopLabel = findDrawableById(constVar.strImgLoop);
         
         // Initialize display
         _timerLabel.setText(constVar.strTxtReady);

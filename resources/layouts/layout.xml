@@ -1,7 +1,7 @@
 <layout id="StartLayout" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://developer.garmin.com/downloads/connect-iq/resources.xsd">
     <bitmap 
         id="ImageCenter" 
-        x="center" y="25"
+        x="center" y="20"
         filename="../drawables/activityIconWorking.png" 
     />
     <label
@@ -20,8 +20,7 @@
     />
     <bitmap
         id="LabelLoop" 
-        x="center" y="230" 
-        scaleX="64" scaleY="64"
+        x="center" y="235" 
         filename="../drawables/loopInactive.png" 
     />
     <label 

@@ -161,7 +161,7 @@ class SequenceAlertsApp extends Application.AppBase {
         
         if (Attention has :vibrate) {
             System.println("Vibrate is an option");
-            Attention.vibrate([new Attention.VibeProfile(100, 1000)]);
+            Attention.vibrate([new Attention.VibeProfile(50, 1000)]);
         }
         
         // Show alert on screen
